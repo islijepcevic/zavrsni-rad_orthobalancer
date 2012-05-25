@@ -1,16 +1,13 @@
-\documentclass[times, utf8, zavrsni]{fer}
+\documentclass[times, utf8, zavrsni, numeric]{fer}
 \usepackage{booktabs}
 
 \begin{document}
 
-% TODO: Navedite broj rada.
-\thesisnumber{000}
+\thesisnumber{2324}
 
-% TODO: Navedite naslov rada.
-\title{Naslov}
+\title{Orthobalancer: aplikacija za kreiranje skupova bioloških vrsta usporedive taksonomijske širine}
 
-% TODO: Navedite vaše ime i prezime.
-\author{Arthur Dent}
+\author{Ivan Slijepčević}
 
 \maketitle
 
@@ -18,31 +15,43 @@
 \izvornik
 
 % Dodavanje zahvale ili prazne stranice. Ako ne želite dodati zahvalu, naredbu ostavite radi prazne stranice.
-\zahvala{}
+\zahvala{
+zahvale
+}
 
+\begin{sloppypar}
 \tableofcontents
+\end{sloppypar}
 
-\chapter{Uvod}
-Uvod rada. Nakon uvoda dolaze poglavlja u kojima se obrađuje tema.
+\listoffigures
+\listoftables
 
-\chapter{Zaključak}
-Zaključak.
+\input{chapters/uvod.tex}
+\input{chapters/teoretski_uvod.tex}
+\input{chapters/podaci.tex}
+\input{chapters/metode.tex}
+\input{chapters/implementacija.tex}
+\input{chapters/rezultati.tex}
+\input{chapters/zakljucak.tex}
 
 \bibliography{literatura}
 \bibliographystyle{fer}
 
 \begin{sazetak}
-Sažetak na hrvatskom jeziku.
 
-\kljucnerijeci{Ključne riječi, odvojene zarezima.}
+% \input{chapters/sazetak.tex}
+
+\kljucnerijeci{}
 \end{sazetak}
 
-% TODO: Navedite naslov na engleskom jeziku.
-\engtitle{Title}
-\begin{abstract}
-Abstract.
+\clearpage
 
-\keywords{Keywords.}
+\engtitle{Orthobalancer: web application for creation of taxonomically balanced sets of orthologous protein sequences}
+\begin{abstract}
+
+% \input{chapters/summary.tex}
+
+\keywords{}
 \end{abstract}
 
 \end{document}
