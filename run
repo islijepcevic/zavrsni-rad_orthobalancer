@@ -1,0 +1,5 @@
+a=`pdflatex zavrsni.tex`;
+a=`bibtex zavrsni.aux`;
+a=`pdflatex zavrsni.tex`;
+a=`pdflatex zavrsni.tex`;
+rm *.blg *.toc *.bbl *.aux *.log *.lof *.lot;
