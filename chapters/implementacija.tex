@@ -1,15 +1,66 @@
 \chapter{Implementacija}
 \label{chap:implementacija}
 
-python
+Aplikacija je pisana u programskom jeziku Python verzije 2.7. Aplikacija se
+dijeli u nekoliko zasebnih cjelina. U središtu aplikacije nalazi se cjovovod
+koji poziva alate poput BLAST-a i fastacmd-a za komuniciranje sa NCBI-jevom
+neredundantnom bazom, zatim dio aplikacije za odabir i balansiranje vrsta na
+taksonomskom stablu te alat mafft za poravnanje sekvenci.  Pored cjevovoda
+implementirana je web aplikacija kao korisničko sučelje za cijeli program. Web
+aplikacija je implementirana koristeći Flask microframework, dok su operacije na
+klijentskoj strani implementirane u javascriptu uz korištenje biblioteke jQuery.
 
-flask
 
-jQuery
+\section{Cjevovod}
+\label{sec:cjevovod}
 
-automatizacija
+Cjevovod je arhitektonski programski obrazac u kojem prolaze kroz filtre koji su
+postavljeni jedan za drugim. Time se simulira jedan tok koji ulazne podatke
+transformacijom kroz filtre generira izlazne podatke. U ovome projektu
+cjevovodna arhitektura je samo logički kostur koji se enkapsulira unutar razreda
+\emph{Pipeline}. Iako je u začetku razvoja aplikacije svaki filter bio zaseban
+proces, vrlo ubrzo je ustanovljeno kako većina filtera generira podatke koji su
+potrebni na raznim mjestima u cijeloj aplikaciji te se činilo lakše imati sve
+podatke u memoriji pojedinog cjevovoda. To je omogućilo da razred
+\emph{Pipeline} naslijedi razred \emph{Thread} iz modula \emph{threading} te se
+može pozivati kao zasebna dretva.
+
+Tok cjevovoda se može vidjeti na slici \ref{fig:cjevovod}. Ulaz u cjevovod
+predstavljaju paralogni proteini u FASTA formatu koje zadaje korisnik. Ti se
+podaci zadaju pri stvaranju objekta \emph{Pipeline} kako bi se mogli zapisati na
+disk u direktorij vezan za instancu \emph{Pipeline-a}. Stvarni objekt kojeg
+prima konstruktor \emph{Pipeline-a} je riječnik prilagođen uporabi servera, što
+je detaljnije opisano u sekciji \ref{sec:server}.
+
+Pri pokretanju cjevovoda za svaku se od unešenih sekvenci stvara objetk razreda
+\emph{ProteinHolder} prilikom čega se obavljaju pozivi filtara nezavisnih za
+svaku pojedinu sekvencu. Prvi filter koji se koristi je alat \emph{BLAST} te je
+izveden kao poziv zasebnog programa \emph{blastall} na sljedeći način:
+% \lstset{language=Pascal} NACI NACINA ZA UBACIT BASH KOD
+blastall -p blastp
+
+i tako dalje...
+
+
+SLIKA CJEVOVODA 
+\label{fig:cjevovod}
+(prikazuje podakte a ne filtre radi boljeg shvaćanja)
+
+tekst o objetkima
+
+SLIKA objekata (class dijagram)
+
+
+\section{tax}
+
+\section{server}
+\label{sec:server}
+    dio po dio
+
+    jQuery
+
+    komunikacija pipelinea i klijenta, log, dekoratori
+
+automatizacija (posla kroz cjevovod->treba ići u neko uvodno poglavlje o namjeri)
 
 robusnost
-
-stvarna arhitektura dijagram (class/moduli)
-vs pipeline (nebitna brzina izvođenja, lakša obrada podataka iz memorije)
