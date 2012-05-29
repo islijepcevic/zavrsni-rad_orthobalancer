@@ -1,0 +1,12 @@
+echo POCINJEM
+pdflatex zavrsni.tex
+
+echo BIBTEX
+bibtex zavrsni.aux
+
+echo TEX 1
+pdflatex zavrsni.tex
+
+echo TEX 2
+pdflatex zavrsni.tex
+rm *.blg *.toc *.bbl *.aux *.log *.lof *.lot;
