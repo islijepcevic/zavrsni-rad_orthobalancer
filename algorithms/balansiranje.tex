@@ -1,0 +1,39 @@
+\begin{algorithm}[h!]
+
+\centering
+\caption{Obilazak stabla --- balansiranje vrsta}
+\label{algo:balance}
+
+\begin{algorithmic}
+
+%TODO - pozvano s cvorom 'root'
+\State $ULAZ:$ taksonomsko stablo, skup zamjenjivih čvorova, $n$ skupova vrsta
+\State $SREDIŠNJE STRUKTURE PODATAKA:$ %TODO (sve postavljeno - opisati)
+\State $IZLAZ:$ višeslojni rječnik $out$koji za svaki balansirani čvor sadrži
+listu vrsta predstavnica iz svake grupe $g$  
+
+\Function{obidiStablo}{$cvor, grupe, zamjenskiCvorovi$}
+    \If{$čvor.zamjenski()$}
+    \Comment{metoda vraća istinu ako je čvor u zamjenskom podstablu} \\
+        \Return $balansiraj(cvor, grupe, zamjenskiCvorovi)$
+    \Else
+        \If{$cvor.list()$}
+        \Comment{metoda vraća istinu ako je čvor list}
+            \ForAll{$grupa \in grupe$}
+                \State $izlaz[grupa]['nezamjenski'] \gets cvor.ime$
+            \EndFor
+        \Else
+            \State $izlaz \gets$ new $izlaz$
+            \ForAll{$dijete \in cvor.dijeca$}
+                \If{$dijete.ukupniBrojac = čvor.ukupniBrojac$}
+                    \State $izlaz \in izlaz \cup obidiStablo(dijete, grupe,
+zamjenskiCvorovi)$
+                \EndIf
+            \EndFor
+        \EndIf
+    \EndIf
+    \Return $izlaz$
+\EndFunction
+
+\end{algorithmic}
+\end{algorithm}  

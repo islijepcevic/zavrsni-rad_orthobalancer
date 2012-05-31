@@ -9,4 +9,4 @@ pdflatex zavrsni.tex
 
 echo TEX 2
 pdflatex zavrsni.tex
-rm *.blg *.toc *.bbl *.aux *.log *.lof *.lot;
+rm *.blg *.toc *.bbl *.aux *.log *.lof *.lot *.loa;

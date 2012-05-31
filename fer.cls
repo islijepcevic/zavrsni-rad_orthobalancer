@@ -378,6 +378,6 @@ Koristi \noexpand\engtitle za definiranje}}
 }
 {
 \vspace*{\fill}
-}
+}                       
 
 \endinput
