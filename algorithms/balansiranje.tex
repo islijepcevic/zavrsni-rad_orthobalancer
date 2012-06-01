@@ -6,10 +6,9 @@
 
 \begin{algorithmic}[1]
 
-%TODO - pozvano s cvorom 'root'
-\State $ULAZ:$ taksonomsko stablo, skup zamjenjivih čvorova, $n$ skupova vrsta
-\State $SREDIŠNJE STRUKTURE PODATAKA:$ %TODO (sve postavljeno - opisati)
-\State $IZLAZ:$ višeslojni rječnik $out$koji za svaki balansirani čvor sadrži
+\State algoritam obilaska počinje funkcijom $obidiStablo()$
+\State $ULAZ:$ korijenski čvor stabla; $n$ skupova vrsta
+\State $IZLAZ:$ višeslojni rječnik $izlaz$ koji za svaki balansirani čvor sadrži
 listu vrsta predstavnica iz svake grupe $g$  
 
 \Function{balansiraj}{cvor, grupe}
@@ -22,9 +21,9 @@ listu vrsta predstavnica iz svake grupe $g$
             \EndFor
         \EndIf
     \EndFor
-    \If{$cvor.brojac[g] > 0 \forall g \in grupe$}
+    \If{$cvor.brojac[g] > 0$ $\forall g \in grupe$}
         \State $cvor.balansiran \gets \top$
-        \If{$\exists k \forall g \in grupe | cvor.brojac[g] = k$}
+        \If{$\exists k \forall g \in grupe (cvor.brojac[g] = k)$}
         %\If{$\forall g \in grupe cvor.brojac[g] SU JEDNAKI$}
             \State $A \gets$ skup svih pripadajućih vrsta pod cvorom $cvor$
             \State $izlaz.pridruzi(A)$
@@ -35,7 +34,7 @@ cvorom $cvor$
             \State $izlaz.pridruzi(R)$
         \EndIf
     \EndIf
-    \Return $izlaz$
+    \State \Return $izlaz$
 \EndFunction
 
 \algstore{balans}
@@ -47,26 +46,25 @@ cvorom $cvor$
 \algrestore{balans}
 
 \Function{obidiStablo}{$cvor, grupe$}
-    \If{$čvor.zamjenski()$}
-    \Comment{metoda vraća istinu ako je čvor u zamjenskom podstablu} \\
-%        \State $izlaz \gets$ new $izlaz$
-        \Return $balansiraj(cvor, grupe)$
+    \If{$cvor.zamjenski()$}
+    \Comment{vraća $\top$ ako je čvor u zamjenskom podstablu}
+        \State \Return $balansiraj(cvor, grupe)$
     \Else
         \If{$cvor.list()$}
-        \Comment{metoda vraća istinu ako je čvor list}
-            \ForAll{$grupa \in grupe$}
-                \State $izlaz[grupa]['nezamjenski'] \gets cvor.ime$
+        \Comment{vraća $\top$ ako je čvor list}
+            \ForAll{$g\in grupe$}
+                \State $izlaz[g][$'nezamjenski'$] \gets cvor.ime$
             \EndFor
         \Else
             \State $izlaz \gets$ new $izlaz$
-            \ForAll{$dijete \in cvor.dijeca$}
-                \If{$dijete.ukupniBrojac = čvor.ukupniBrojac$}
-                    \State $izlaz \in izlaz \cup obidiStablo(dijete, grupe)$
+            \ForAll{$dijete \in cvor.djeca$}
+                \If{$dijete.ukupniBrojac = cvor.ukupniBrojac$}
+                    \State $izlaz \gets izlaz \cup obidiStablo(dijete, grupe)$
                 \EndIf
             \EndFor
         \EndIf
     \EndIf
-    \Return $izlaz$
+    \State \Return $izlaz$
 \EndFunction
 
 \end{algorithmic}

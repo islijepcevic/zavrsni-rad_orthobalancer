@@ -208,6 +208,7 @@ inicijalizira na $1$. Istovremeno se ukupni brojač grupa u tome listu postavi n
 $1$ te se pozove metoda koja propagira ukupni brojač grupa sve do korijena
 stabla, pazeći da ukupni brojač niti u jednom čvoru ne bude više od jednom
 povećan za neku grupu ortologa.
+% TODO možda napisati pseudokod
 
 Nakon toga treba inicijalizirati zamjenske čvorove i pripadna podstabla. Za
 svaki zamjenski čvor poziva se rekurzivna funkcija koja se spušta do listova i
@@ -215,10 +216,25 @@ svakome čvoru u njegovu listu zamjenskih roditeljskih čvorova dodaje
 \emph{tax\_id} zamjenskog čvora nad kojim je rekurzija pozvana.  Time svaki čvor
 sadrži informaciju kojim zamjenskim podstablima pripada.
 
-Slijedi algoritma \ref{algo:balance}.
-
 \input{algorithms/balansiranje.tex}
-%\label{algo:balance}
+
+Slijedi algoritam \ref{algo:balance}. Algoritam rekurzivno prolazi stablom,
+polazeći od listova. U zamjenskim podstablima balansira grupe ortologa na
+sljedeći način. Nakon što se obiđu listovi, svaki čvor, za svaku od grupa
+ortologa, postavlja svoj brojač za tu grupu na vrijednost zbroja brojača svoje
+djece, pri čemu se od djece ne razmatraju već balansirani čvorovi. U slučaju da
+nijedan brojač u čvoru ne ostane na vrijednosti $0$, čvor se proglašava
+balansiran. Drugim riječima, u svakoj grupi ortologa postoji barem jedna vrsta
+ispod toga čvora te se one mougu ispisati kao uparene ili zamjenjive vrste.  U
+idealnom, ali i najčešćem slučaju, desit će se da je vrsta prisutna u svim
+grupama ortologa te će tada sam čvor promatrane vrste biti proglašen
+balansiranim i roditelji ga zbog oga neće razmatrati. Za primjenu nalaženja
+ortolognih proteina to bi značilo da neka vrsta, na primjer Homo sapiens, sadrži
+ortologni protein svakome od ulaznih paraloga. Algoritam je tako osmišljen kako
+bi se balansirale što srodnije vrste.  Što se tiče dijelova stabla koji nisu pod
+niti jednim zamjenskim čvorom, algoritam ne provodi postupak balansiranja te se
+u izlaz dodaju jedino one vrste koje su prisutne u svim grupama ortologa. Izlaz
+ovog algoritma vraća se pozivatelju, odnosno cjevovodu.
 
 
 \section{server}
