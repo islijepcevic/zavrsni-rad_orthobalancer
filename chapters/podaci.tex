@@ -12,13 +12,41 @@ taksonomsko stablo živog svijeta.
 \section{FASTA format}
 \label{sec:fasta}
 
+FASTA je jedan od standardnih formata zapisa genetskih informacija na računalu.
+Format je tekstualnog oblika, a koristi se u NCBI-jevim alatima i bazama
+podataka, poput BLAST-a i neredundantne baze proteinskih sekvenci. Jedan zapis u
+datoteci s FASTA sekvencama se sastoji od zaglavlja i sekvence. Zaglavlje je
+jedan redak koji započinje s znakom '\texttt{>}' te nakon njega može imati razne
+informacije koje opisuju dan zapis. Zapisi proteinskih sekvenci u NCBI-jevoj
+neredundantnoj bazi obično imaju jedinstveni ključ sekvence, ime proteina, ime
+vrste u kojoj se protein nalazi, podatke o originalnoj bazi i slično. Nakon
+zaglavlja slijede retci koji sadrže zapisanu sekvencu gdje svaki znak
+predstavlja jedan reziduum aminokiseline u peptidnom lancu. Kad bi ti se retci
+slijepili zajedno, dobila bi se sekvenca u jednom nizu. Prazne linije nisu
+dopuštene.
+
 
 \section{Neredundantna baza}
 \label{sec:nrdb}
 
+Neredundantna baza je baza podataka koju nudi NCBI, a sadrži prikupljene zapise
+iz nekoliko baza sa raznih instituta u svijetu, poput GenPept, Swissprot, PIR,
+PDF, PDB i NCBI RefSeq. Za neredundantnu bazu se garantira da ne sadrži dvije
+jednake sekvence, već se one tada spajaju u jedan FASTA zapis sa proširenim
+zaglavljem.
+
 
 \section{Taksonomsko stablo živog svijeta}
 \label{sec:taxdb}
+
+\emph{Taxonomy} baza, odnosno baza taksonomskog stabla živog svijeta
+dostupna je u obliku nekoliko tekstualnih datoteka. Najbitnije, koje se koriste
+u Orthobalanceru su \emph{nodes.dmp} i \emph{names.dmp}. Za svaki čvor stabla,
+\emph{nodes.dmp} sadrži identifikacijski broj čvora, identifikacijski broj
+roditelja te niz dodatnih informacija, poput ranga ovog čvora u stablu (carstvo,
+rod, vrsta, \ldots). \emph{names.dmp} za svaki čvor čuva niz raznih imena, od
+kojih je jedno jedinstveno, odnosno znanstveno, a ostala su prisutna za lakše
+raspoznavanje od strane čovjeka.
 
 
 \section{Ulaz}
