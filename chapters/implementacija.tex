@@ -29,8 +29,8 @@ Tok cjevovoda se može vidjeti na slici \ref{fig:cjevovod}. Ulaz u cjevovod
 predstavljaju paralogni proteini u FASTA formatu koje zadaje korisnik. Ti se
 podaci zadaju pri stvaranju objekta \emph{Pipeline} kako bi se mogli zapisati na
 disk u direktorij vezan za instancu \emph{Pipeline-a}. Stvarni objekt kojeg
-prima konstruktor \emph{Pipeline-a} je rječnik prilagođen uporabi servera, što
-je detaljnije opisano u odjeljku \ref{sec:server}.
+prima konstruktor \emph{Pipeline-a} je rječnik prilagođen uporabi web
+aplikacije, što je detaljnije opisano u odjeljku \ref{sec:server}.
 
 % SLIKA CJEVOVODA % TODO
 \begin{figure}[h!]
@@ -237,14 +237,126 @@ u izlaz dodaju jedino one vrste koje su prisutne u svim grupama ortologa. Izlaz
 ovog algoritma vraća se pozivatelju, odnosno cjevovodu.
 
 
-\section{server}
+\section{Web aplikacija}
 \label{sec:server}
-    dio po dio
 
-    jQuery
+Korisničko sučelje Orthobalancera ostvareno je kao web aplikacija implementirana
+također u Pythonu koristeći Flask microframework. Flask je izgrađen na Werkzeug
+WSGI\footnote{Web Server Gateway Interface\cite{pep333}} web alatu i Jinja2
+sustavu pre'dložaka. Flask je zvan \emph{microframeworkom} jer svoju jezgru drži
+jednostavnom, ali proširivom. Flask također nudi određene konvencije koje
+pojednostavljuju izgradnju web aplikacije. Osim Flaska, za razvoj aplikacije
+korišten je javascript uz većinu koda napisanu pomoću biblioteke jQuery. Osim za
+asinkronu komunikaciju sa poslužiteljem pomoću AJAX-a, javasvript se najviše
+koristio za postizanje dinamike, robusnosne provjere i sinkronizacije ulaznih
+podataka.
 
-    komunikacija pipelinea i klijenta, log, dekoratori
+% pomalo o svakom bitnom url-u / templatu
+Stranice koje aplikacija generira bazirane su na Jinja2 predlošcima. Jedno od
+njihovih pogodnih svojstava je nasljeđivanje predložaka. Time se omogućuje da
+postoji jedan temeljni predložak koji sadrži osnovne elemente svake stranice, a
+ostali samo nasljeđuju te elemente i popunjavaju potrebni sadržaj. HTML
+predlošci Orthobalancera su sljedeći:
 
-automatizacija (posla kroz cjevovod->treba ići u neko uvodno poglavlje o namjeri)
+\begin{itemize}
 
-robusnost
+    \item \emph{layout.html} definira raspored svih elemenata te ga svi ostali
+predlošci nasljeđuju.
+
+    \item \emph{input.html} prihvaća ulazne podatke od korisnika. Detaljniji
+opis mogućnosti koje su ostvarene za ulazne podatke se nalazi u odjeljku.
+\ref{sec:input}
+
+    \item \emph{manipulate\_exchangeable.html} je stranica koja se prikazuje
+samo kada korisnik želi unijeti vlastite zamjenske čvorove taksonomskog stabla.
+Stranica se otvara s ponuđenim pretpostavljenim skupom zamjenskih čvorova.
+
+    \item \emph{execution.html}  prikazuje trenutno stanje izvođenja, asinkrono
+komunicirajući sa poslužiteljem, kako bi korisnik imao jasniju predodžbu o
+zadacima koje poslužitelj obavlja te o trajanju izvođenja. Jednom kada stranica
+za ispis primi poruku o kraju izvođenja, automatski se preusmjerava na URL
+\textbf{'/output'}.
+
+    \item \emph{output.html} prikazuje izlaz aplikacije korisniku. Prikazani
+izlaz je tablica na slici \ref{fig:tablica}. Osim tablice, nude se poveznice na
+niz datoteka za preuzimanje. Izlazne datoteke su opisane u odjeljku
+\ref{sec:output}.
+
+    \item \emph{error.html} se prikazuje ukoliko na poslužitelju dođe do
+pogreške.
+
+\end{itemize}
+
+Poslužitelj Orthobalancera se može zamisliti kao stroj stanja kojemu su stanja
+predočena URL-om\footnote{unified resource locator}. Flask radi tako da veže
+URL na jednu funkciju Pythona\footnote{\emph{view} funkcija} koristeći
+mehanizam dekoriranja funkcije kojeg nudi Python\cite{pep}. Na taj se način uz
+svaki URL veže određeni posao koji treba obaviti. Bitniji URL-ovi su sljedeći:
+
+\begin{itemize}
+
+    \item \textbf{'/'} ulazna točka za pokretanje novog upita. Upit dobiva
+jedinstveni identifikacijski broj te se za njega inicijaliziraju određeni podaci
+na poslužitelju kao sjednički podaci. Automatski se preusmjerava na
+\textbf{/start}. Od ove točke na dalje svaki URL ima identifikacijski broj upita
+u svome parametru, što nije posebno naznačeno. Takav je način prenošenja
+identifikacijskog broja odabran kako bi korisnik samo pomoću URL-a mogao
+dohvatiti svoje rezultate.
+
+    \item \textbf{'/start'} pozvan za inicijalizirani upit. Generira i vraća
+HTML stranicu baziranu na predlošku \emph{input.html}.
+
+    \item \textbf{'/finish\_input'} poziva se tek u trenutku kad su na klijentskoj
+strani svi ulazni podaci pravilno uneseni. Podaci su tada već spremljeni u
+sjedničkim varijablama te se može stvoriti instanca razreda \emph{Pipeline},
+odnosno nova dretva cjevovoda. Ovisno o korisnikovom odabiru na stranici
+\emph{input.html}, sljedeće stanje izvođenja može biti na URL-u
+\textbf{'/get\_exchangeable'} ako korisnik želi zadati svoje zamjenske čvorove,
+odnosno na URL-u \textbf{'/preparations'} za pokretanje cjevovoda s predloženim
+zamjenskim čvorovima.
+
+    \item \textbf{'/preparations'} čita sadržaj datoteke sa predloženim
+zamjenskim čvorovima, sprema ih u argumente sjednice te se preusmjerava na URL
+\textbf{'/executing'}.
+
+    \item \textbf{'/get\_exchangeable'} generira stranicu baziranu na predlošku
+\emph{manipulate\_exchangeable.html} s podacima  iz datoteke s predloženim
+zamjenskim čvorovima.
+
+    \item \textbf{'/save\_exchangeable'} sprema korisnikove zamjenske čvorove u
+argumente sjednice te se preusmjerava na URL \textbf{'/executing'}.
+
+    \item \textbf{'/executing'} pokreće rad dretve cjevovoda te generira
+stranicu baziranu na predlošku \emph{execution.html}.
+
+    \item \textbf{'/output'} generira stranicu iz predloška \emph{output.html}
+predajući joj sve potrebne informacije dohvaćene iz datoteka koje je stvorio
+izlaz cjevovoda.
+
+\end{itemize}
+
+% todo možda neki opis job/session (pitat Mile/Ivanu)
+    
+% LOG - možda posebna sekcija - todo pitat
+Vrijeme izvođenja posla u cjevovodu može potrajati nekoliko minuta te je zato
+bilo potrebno osmisliti način kako predočiti korisniku napredak izvođenja u
+nekom trenutku. Rješenje je osmišljeno na način da cjevovod svoj napredak
+zapisuje u \emph{log} datoteke, a klijent asinkrono traži od poslužitelja
+sadržaj tih datoteka svakih nekoliko sekundi. Za odvajanje funkcionalnosti
+ispisa stanja cjevovoda u \emph{log} datoteke iskorišten je Pythonov mehanizam
+dekoriranja funkcija. Implementirani su razredi \emph{beforeMessage} i
+\emph{afterMessage} koji imaju funkcionalnost dekoratora. Oba dekoratora imaju
+argument --- ključ rječnika koji sadrži konkretan tekst za ispis u \emph{log}
+datoteke. \emph{beforeMessage} dekorira funkciju tako da obavlja ispis prije
+poziva dekorirane funkcije, a \emph{afterMessage} nakon izvršavanja dekorirane
+funkcije. Oba razreda dekoratora nasljeđuju temeljni dekorator
+\emph{messagingDecorators} koji sadrži implementaciju samog zapisivanja statusa
+u \emph{log} datoteke, a izvedeni razredi se samo brinu o načinu dekoriranja.
+
+% todo upute u sidebaru (možda nije potrebno - pitat)
+
+\section{sinkronizacija ulaza}
+\label{sec:input}
+
+ideja i srž implementacije sinkronizacije i ROBUSNOSTI unosa podataka
+slika
