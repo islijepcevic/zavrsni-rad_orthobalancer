@@ -5,7 +5,7 @@ Aplikacija je pisana u programskom jeziku Python verzije 2.7. Aplikacija se
 dijeli u nekoliko zasebnih cjelina. U središtu aplikacije nalazi se cjovovod
 koji poziva alate poput BLAST-a i fastacmd-a za komuniciranje sa NCBI-jevom
 neredundantnom bazom, zatim dio aplikacije za odabir i balansiranje vrsta na
-taksonomskom stablu te alat mafft za poravnanje sekvenci.  Pored cjevovoda
+taksonomskom stablu te alat mafft\cite{mafft} za poravnanje sekvenci.  Pored cjevovoda
 implementirana je web aplikacija kao korisničko sučelje za cijeli program. Web
 aplikacija je implementirana koristeći Flask microframework, dok su operacije na
 klijentskoj strani implementirane u javascriptu uz korištenje biblioteke jQuery.
@@ -128,12 +128,16 @@ gi-broj te se ne razmatraju u nastavku programa.
 
 Ovdje bi se još mogla dodati funkcionalnost kojom bi se za vrstu kojoj je
 protein odbačen pronašao sljedeći najbolji nezauzeti protein, no to nije
-razmatrano jer predstavlja rubni slučaj osnovne funkcionalnosti odbacivanja
+razmatrano. Za takve slučajeve ne može se sa sigurnošču reći jesu li kodirajući
+geni doista ortologni ili se u nekoj roditeljskoj vrsti gen duplicirao te se sa
+takvim nejednoznačnostima aplikacija ne bavi.
+
+predstavlja rubni slučaj osnovne funkcionalnosti odbacivanja
 sekvenci, što je već samo po sebi rubni slučaj i vrlo se rijetko dešava.
 
 Najbitniji korak u cjevovodu je pronalaženje i balansiranje zajedničkih vrsta na
 stablu taksonomije živog svijeta. Ovaj korak je detaljno opisan u odjeljku
-\label{sec:tax}. Ovom se filtru kao ulaz predaju kompletni opisnici proteina,
+\ref{sec:tax}. Ovom se filtru kao ulaz predaju kompletni opisnici proteina,
 odnosno objekti razreda \emph{ProteinHolder} iz kojih sam filter povlači sve
 potrebne informacije. Nakon što završi obrada, izlaz filtra je predočen
 višeslojnim rječnikom koji razdvaja podatke po sljedećim slojevima: grupe
@@ -142,7 +146,7 @@ ortologa, grupe zamjenskih čvorova u taksonomskom stablu, grupe balansiranih
 
 Zadnji korak u cjevovodu prije zapisivanja svih skupljenih podataka na disk je
 poravnanje sekvenci dobivenih kao izlaz programa \emph{fastacmd}. Za poravnanje
-se koristi alat \emph{mafft} te mu je ulaz datoteka sa zapisanim sekvencama u FASTA
+se koristi alat \emph{mafft}\cite{mafft} te mu je ulaz datoteka sa zapisanim sekvencama u FASTA
 formatu, a izlaz datoteka sa istim, ali poravnatim sekvencama. \emph{mafft} se
 poziva na sljedeći način:
 \begin{lstlisting}[language=bash]
@@ -243,7 +247,7 @@ ovog algoritma vraća se pozivatelju, odnosno cjevovodu.
 Korisničko sučelje Orthobalancera ostvareno je kao web aplikacija implementirana
 također u Pythonu koristeći Flask microframework. Flask je izgrađen na Werkzeug
 WSGI\footnote{Web Server Gateway Interface\cite{pep333}} web alatu i Jinja2
-sustavu pre'dložaka. Flask je zvan \emph{microframeworkom} jer svoju jezgru drži
+sustavu predložaka. Flask je zvan \emph{microframeworkom} jer svoju jezgru drži
 jednostavnom, ali proširivom. Flask također nudi određene konvencije koje
 pojednostavljuju izgradnju web aplikacije. Osim Flaska, za razvoj aplikacije
 korišten je javascript uz većinu koda napisanu pomoću biblioteke jQuery. Osim za
