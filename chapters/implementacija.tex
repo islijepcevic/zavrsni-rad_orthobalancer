@@ -248,16 +248,17 @@ sustavu predložaka. Flask je zvan \emph{microframeworkom} jer svoju jezgru drž
 jednostavnom, ali proširivom. Flask također nudi određene konvencije koje
 pojednostavljuju izgradnju web aplikacije. Osim Flaska, za razvoj aplikacije
 korišten je javascript uz većinu koda napisanu pomoću biblioteke jQuery. Osim za
-asinkronu komunikaciju sa poslužiteljem pomoću AJAX-a, javasvript se najviše
-koristio za postizanje dinamike, robusnosne provjere i sinkronizacije ulaznih
-podataka.
+asinkronu komunikaciju s poslužiteljem pomoću AJAX-a\footnote{Asynchronous
+JavaScript and XML}, javasvript se najviše koristio za postizanje dinamike te
+robusnosti provjere i sinkronizacije ulaznih podataka.
 
 % pomalo o svakom bitnom url-u / templatu
-Stranice koje aplikacija generira bazirane su na Jinja2 predlošcima. Jedno od
-njihovih pogodnih svojstava je nasljeđivanje predložaka. Time se omogućuje da
-postoji jedan temeljni predložak koji sadrži osnovne elemente svake stranice, a
-ostali samo nasljeđuju te elemente i popunjavaju potrebni sadržaj. HTML
-predlošci Orthobalancera su sljedeći:
+HTML\footnote{HyperText Markup Language} stranice koje aplikacija generira
+bazirane su na Jinja2 predlošcima. Jedno od njihovih pogodnih svojstava je
+nasljeđivanje predložaka. Time se omogućuje da postoji jedan temeljni predložak
+koji sadrži osnovne elemente svake stranice, a ostali samo nasljeđuju te
+elemente i popunjavaju potrebni sadržaj. HTML predlošci Orthobalancera su
+sljedeći:
 
 \begin{itemize}
 
@@ -291,7 +292,7 @@ pogreške.
 Poslužitelj Orthobalancera se može zamisliti kao stroj stanja kojemu su stanja
 predočena URL-om\footnote{unified resource locator}. Flask radi tako da veže
 URL na jednu funkciju Pythona\footnote{\emph{view} funkcija} koristeći
-mehanizam dekoriranja funkcije kojeg nudi Python\cite{pep}. Na taj se način uz
+mehanizam dekoriranja\cite{pep} funkcije kojeg nudi Python. Na taj se način uz
 svaki URL veže određeni posao koji treba obaviti. Bitniji URL-ovi su sljedeći:
 
 \begin{itemize}
@@ -356,8 +357,31 @@ u \emph{log} datoteke, a izvedeni razredi se samo brinu o načinu dekoriranja.
 
 % todo upute u sidebaru (možda nije potrebno - pitat)
 
+
 \section{sinkronizacija ulaza}
 \label{sec:input}
 
-ideja i srž implementacije sinkronizacije i ROBUSNOSTI unosa podataka
-slika
+%ideja i srž implementacije sinkronizacije i ROBUSNOSTI unosa podataka slika
+
+Jedan od nužnih preduvjeta za uspješan rad aplikacije jest pažljivo preuzimanje
+ulaznih podataka uz robusne provjere. S druge strane bitno je omogućiti
+raznolike načine unošenja podataka za lakše rukovanje aplikacijom. Orthobalancer
+na ulazu očekuje dvije ili više proteinskih sekvenci od kojih će svaka
+sadržavati različito ime. Elemente za unos podataka pojedinog proteina na
+stranici moguće je dodavati dinamički. Sam FASTA zapis se može izravno upisati u
+površinu za unos teksta, ili se može predati datoteka sa sadržajem FASTA zapisa.
+
+Inicijalna ideja bila je sve provjere implementirati na strani klijenta pomoću
+javascripta, no budući da javascript nije pogodan za otvaranje sadržaja datoteka
+odlučeno je da se podaci čuvaju na poslužitelju. Zbog toga je potrebno prilikom
+svake promjene sadržaja bilo kojeg elementa unosa na stranici sinkronizirati
+podatke sačuvane u sjedničkim varijablama na poslužitelju sa trenutnim stanjem
+na stranici koju gleda korisnik. Sinkronizacije se događaju u pozadini
+asinkronim komuniciranjem klijenta i poslužitelja.
+
+-unos imena, sequence diagram
+
+-brisanje proteina sa stranice (sequence
+diagram)
+
+-unos FASTA (mislim da ne treba diagram)
