@@ -372,16 +372,62 @@ stranici moguće je dodavati dinamički. Sam FASTA zapis se može izravno upisat
 površinu za unos teksta, ili se može predati datoteka sa sadržajem FASTA zapisa.
 
 Inicijalna ideja bila je sve provjere implementirati na strani klijenta pomoću
-javascripta, no budući da javascript nije pogodan za otvaranje sadržaja datoteka
-odlučeno je da se podaci čuvaju na poslužitelju. Zbog toga je potrebno prilikom
-svake promjene sadržaja bilo kojeg elementa unosa na stranici sinkronizirati
-podatke sačuvane u sjedničkim varijablama na poslužitelju sa trenutnim stanjem
-na stranici koju gleda korisnik. Sinkronizacije se događaju u pozadini
-asinkronim komuniciranjem klijenta i poslužitelja.
+javascripta, no budući da javascript nije pogodan za otvaranje i čitanje
+sadržaja datoteka odlučeno je da se podaci čuvaju na poslužitelju. Zbog toga je
+potrebno prilikom svake promjene sadržaja bilo kojeg elementa unosa na stranici
+sinkronizirati podatke sačuvane u sjedničkim varijablama na poslužitelju sa
+trenutnim stanjem na stranici koju gleda korisnik. Sinkronizacije se događaju u
+pozadini asinkronim komuniciranjem klijenta i poslužitelja.
 
--unos imena, sequence diagram
+\begin{figure}[h!]
+\centering
+\includegraphics[width=5.3in]{figures/Unos_imena.png}
+\caption{UML sekvencijski dijagram koji prikazuje slijed operacija prilikom
+unosa imena}
+\label{fig:imena}
+\end{figure}
 
--brisanje proteina sa stranice (sequence
-diagram)
+Obrada i spremanje podataka prilikom unosa imena sekvence prikazani su
+UML\footnote{Unified Modeling Language} sekvencijskim dijagramom na slici
+\ref{fig:imena}. Obrada počinje automatski u pozadini netom nakon što se ime
+unese. Klijent najprije pretražuje imena svih vidljivih sekvenci. Ukoliko je
+postavljeno ime različito od svih drugih unesenih imena, AJAX pozivom se
+dojavljuje poslužitelju da postavi uneseno ime za tu sekvencu. Nakon što postavi
+ime, poslužitelj provjerava validnost svih podataka za danu sekvencu te vraća
+staro ime koje je bilo pridruženo sekvenci. Klijent briše eventualne poruke
+upozorenja za danu sekvencu jer je ime jedinstveno. U slučaju da uneseno ime
+nije jedinstveno, AJAX-om se dojavljuje poslužitelju uneseno ime uz naznaku da
+je krivo. Svim sekvencama sa unesenim imenom poslužitelj miče zastavicu da su
+jedinstvena te pokreće validciju njihovih podataka. Poslužitelj opet vraća staro
+ime sekvence sa promijenjenim imenom. Također, u slučaju nejedinstvenog unesenog
+imena, svim HTML elementima s istim imenom se pridružuje prikladna poruka
+upozorenja. Nakon postavljanja imena na poslužitelju, klijent je dužan
+provjeriti jesu li neka od jednakih imena na stranici trenutnim unosom
+razriješena. Klijent dohvaća sve elemente s imenom jednakim starim imenom koje
+je poslužitelj vratio. Ukoliko takvih nema, ništa se ne događa jer problema niti
+nije bilo. Ako ih je više, na primjer 2, to znači da ih je prethodno bilo 3, ali
+ta se imena i dalje trebaju razrješiti tako da im se poruke upozorenja ne miču.
+Na poslijetku, ako je samo jedno ime pronađeno, njemu se brišu poruke upozorenja
+te se AJAX-om dojavljuje poslužitelju da je ono od sada jedinstveno.
 
--unos FASTA (mislim da ne treba diagram)
+%todo -brisanje proteina sa stranice (sequence diagram)
+
+%todo -unos FASTA (mislim da ne treba diagram) (text/file->iframe)
+
+Validacija pojedine sekvence na poslužitelju postoji kako bi se svi podaci dane
+sekvence provjerili jesu li uneseni i jesu li u dozvoljenom obliku kako bi se
+jednostavnom provjerom zastavice 'OK' moglo ustvrditi može li dana sekvenca biti
+proslijeđena u cjevovod. Prilikom validacije događaju se sljedeće provjere:
+
+\begin{itemize}
+
+\item je li sekvenca još aktivna?
+
+\item je li uneseno ime jedinstveno? Ako nije, dozvoli iznimku za slučaj u kojem
+ime nije uneseno, a postoji ime u FASTA zaglavlju unesene sekvence.
+
+\item je li unesena sekvenca?
+
+\end{itemize}
+
+%todo -submit i nastavak
