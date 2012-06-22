@@ -97,9 +97,9 @@ izlaz cjevovoda.
 
 \end{itemize}
 
-% todo možda neki opis job/session (pitat Mile/Ivanu)
+% TODO možda neki opis job/session (pitat Mile/Ivanu)
     
-% LOG - možda posebna sekcija - todo pitat
+% LOG - možda posebna sekcija - TODO pitat
 Vrijeme izvođenja posla u cjevovodu može potrajati nekoliko minuta te je zato
 bilo potrebno osmisliti način kako predočiti korisniku napredak izvođenja u
 nekom trenutku. Rješenje je osmišljeno na način da cjevovod svoj napredak
@@ -115,7 +115,7 @@ funkcije. Oba razreda dekoratora nasljeđuju temeljni dekorator
 \emph{messagingDecorators} koji sadrži implementaciju samog zapisivanja statusa
 u \emph{log} datoteke, a izvedeni razredi se samo brinu o načinu dekoriranja.
 
-% todo upute u sidebaru (možda nije potrebno - pitat)
+% TODO upute u sidebaru (možda nije potrebno - pitat)
 
 
 \section{sinkronizacija ulaza}
@@ -137,14 +137,14 @@ sadržaja datoteka odlučeno je da se podaci čuvaju na poslužitelju. Zbog toga
 potrebno prilikom svake promjene sadržaja bilo kojeg elementa unosa na stranici
 sinkronizirati podatke sačuvane u sjedničkim varijablama na poslužitelju sa
 trenutnim stanjem na stranici koju gleda korisnik. Sinkronizacije se događaju u
-pozadini asinkronim komuniciranjem klijenta i poslužitelja. Asinkroni
+pozadini asinkronim komuniciranjem klijenta i poslužitelja. Asinkrona
 komunikacija ostvarena je AJAX tehnologijom, a klijent i poslužitelj prenose
 podatke u JSON\footnote{JavaScript Object Notation} formatu, za što Flask ima
 kvalitetnu podršku.
 
 \begin{figure}[h!]
 \centering
-\includegraphics[width=5.3in]{figures/Unos_imena.png}
+\includegraphics[width=6.1in, height=6in]{figures/Unos_imena.png}
 \caption{UML sekvencijski dijagram koji prikazuje slijed operacija prilikom
 unosa imena}
 \label{fig:imena}
@@ -170,31 +170,59 @@ provjeriti jesu li neka od jednakih imena na stranici trenutnim unosom
 razriješena. Klijent dohvaća sve elemente s imenom jednakim starim imenom koje
 je poslužitelj vratio. Ukoliko takvih nema, ništa se ne događa jer problema niti
 nije bilo. Ako ih je više, na primjer 2, to znači da ih je prethodno bilo 3, ali
-ta se imena i dalje trebaju razrješiti tako da im se poruke upozorenja ne miču.
+ta se imena i dalje trebaju razriješiti tako da im se poruke upozorenja ne miču.
 Na poslijetku, ako je samo jedno ime pronađeno, njemu se brišu poruke upozorenja
 te se AJAX-om dojavljuje poslužitelju da je ono od sada jedinstveno. Poslužitelj
 označava ime jedinstvenim te pokreće validaciju nad tom sekvencom.
 
-%todo -UNOS FASTA (mislim da ne treba diagram) (text/file->iframe)
-Sama sekvenca korisnik može unijeti na dva načina. Ako je odabran tekstualni
-način, jednom kada se sekvenca upiše u površinu za unos aktivira se logika koja
-predaju sekvencu poslužitelju na obradu AJAX pozivom. 
+Unos sekvence korisnik može obaviti na dva načina: može napisati ili zalijepiti
+FASTA sekvencu u područje za unos teksta ili može \emph{uploadati} FASTA
+datoteku. Ako je odabran tekstualni način, jednom kada se sekvenca upiše u
+površinu za unos aktivira se logika koja predaje sekvencu poslužitelju na obradu
+AJAX pozivom. Za slučaj kada je odabran \emph{upload} FASTA datoteke ne može se
+koristiti AJAX. AJAX tehnologija je u mogućnosti slati samo čisti tekst, a
+javascript nije u mogućnosti otvarati datoteke odabrane za \emph{upload}. Iz tih
+razloga se ovdje koristi pomalo zastarjelo i ne sasvim pouzdano, ali jedino
+preostalo rješenje, a to je simuliranje \emph{submita} HTML forme i korištenje
+HTML \emph{iframe} taga. \emph{iframe} tag u svojoj osnovnoj funkcionalnosti
+omogućava prikaz bilo koje druge stranice unutar osnovne stranice koju je
+korisnik zatražio, drugim riječima \emph{iframe} element je kao prozor koji
+prikazuje neku drugu stranicu. No ako \emph{form} tagu koji sadrži sve elemente
+ulaznih podataka za \emph{target} tag postavimo ime \emph{iframea} na istoj
+stranici, sadržaj trenutne stranice ostati će nepromijenjen, što uključuje i sve
+podatke u \emph{input} elementima koje je korisnik unio. U ovome slučaju, gdje
+je potrebno asinkrono prenijeti datoteku do poslužitelja, dodane su sljedeće
+akcije. Prilikom odabira datoteke za \emph{upload} automatski se poziva
+javascript fukcija koja simulira \emph{submit} glavne forme. Poslužitelj potom
+preuzima datoteku, sprema ju, poziva obradu sekvence i vraća tijelo javascript
+poziva kojim se označava kraj slanja datoteke poslužitelju. Minimalni uvjet koji
+sama datoteka mora zadovoljiti jest da ima nastavak \emph{.fasta} ili
+\emph{.txt}.
+
+Obrada sekvence na poslužitelju prvenstveno provjerava jesu li predani podaci
+doista u FASTA formatu. Zapis ne mora nužno sadržavati FASTA zaglavlje jer
+korisnik može upisati ime koje želi, a ime je jedino što bi se uzimalo iz
+zaglavlja ulaznih sekvenci. Za sekvencu je bitno da ne sadrži nedozvoljene
+znakove koji ne predstavljaju niti jednu aminokiselinu. Sekvenca se za daljnju
+obradu sprema u varijable sjednice kao jedan znakovni niz velikih slova bez
+bjelina. Na kraju obrade pokreće se validacija nad tom sekvencom.
 
 % BRISANJE PROTEINA SA STRANICE
 Sekvence na stranici moguće je dinamički dodavati i brisati. Dodavanje nove
 sekvence samo umeće nove HTML elemente na stranicu, a podaci za tu sekvencu se
-inicijaliziraju na poslužitelju prilikom prvog AJAX poziva, koji god on bio.
-Brisanje sekvence zahtijeva određene akcije. Klijent najprije sakrije obrisanu
-sekvencu, iako ona još uvijek posoji. Zatim pretraži i dohvati sve elemente s
-imenom jednakim imenu obrisane sekvence. Nakon toga, klijent AJAX pozivom
-dojavljuje poslužitelju da je određena sekvenca obrisana, prosljeđujući mu
-istovremeno niz istoimenih sekvenci. Poslužitelj označava obrisanu sekvencu
+inicijaliziraju na poslužitelju prilikom prvog AJAX poziva koji sadrži tu
+sekvencu. Brisanje sekvence zahtijeva određene akcije. Klijent najprije sakrije
+obrisanu sekvencu, iako ona još uvijek posoji. Zatim pretraži i dohvati sve
+elemente s imenom jednakim imenu obrisane sekvence. Nakon toga, klijent AJAX
+pozivom dojavljuje poslužitelju da je određena sekvenca obrisana, prosljeđujući
+mu istovremeno niz istoimenih sekvenci. Poslužitelj označava obrisanu sekvencu
 neaktivnom i pokreće validaciju nad njome. Na kraju, ako je duljina niza
 istoimenih elemenata jednaka 2, to znači da od trenutka brisanja drugi element
 ima jedinstveno ime. Poslužitelj označava ime druge sekvence jedinstvenim te
 pokreće validaciju nad njome. Po povratku na klijenta, ako je duljina niza bila
 jednaka 2, miču se poruke upozorenja druge sekvence.
 
+% VALIDACIJA    # check_ok()
 Validacija pojedine sekvence na poslužitelju postoji kako bi se svi podaci dane
 sekvence provjerili jesu li uneseni i jesu li u dozvoljenom obliku kako bi se
 jednostavnom provjerom zastavice 'OK' moglo ustvrditi može li dana sekvenca biti
@@ -204,11 +232,22 @@ proslijeđena u cjevovod. Prilikom validacije događaju se sljedeće provjere:
 
 \item je li sekvenca još aktivna?
 
-\item je li uneseno ime jedinstveno? Ako nije, dozvoli iznimku za slučaj u kojem
+\item je li uneseno ime jedinstveno? Ako nije, iznimno dozvoli za slučaj u kojem
 ime nije uneseno, a postoji ime u FASTA zaglavlju unesene sekvence.
 
 \item je li unesena sekvenca?
 
 \end{itemize}
 
-%todo -submit i nastavak
+Jednom kad korisnik pritisne bilo koju od tipki za nastavak, bilo da je to
+\emph{Proceed} ili \emph{Modify exchangeable nodes}, pretpostavlja se da su svi
+podaci već spremljeni na poslužitelju. Pritiskom na tipku pozvat će se
+\emph{submit} alternativne forme koja je vezana za provjeru validnosti podataka.
+Forma je također vezana za svoj \emph{iframe} za slučaj da svi podaci nisu
+spremni za pokretanje cjevovoda. \emph{iframe} je ovdje potreban kako se ne bi
+izgubili svi podaci koje je korisnik unio.  Poslužitelj ovdje samo provjerava
+izračunatu validnost podataka te vraća tijelo javascript poziva kojim se
+ispisuje ispravna poruka o grešci ili kojim se izvodi \emph{submit} konačne
+forme za nastavak izvođenja.
+
+% TODO treba li opisati i manage exchangeable?
