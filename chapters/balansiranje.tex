@@ -6,11 +6,12 @@ Pronalazak zajedničkih vrsta najbitniji je modul Orthobalancera. U suštini, ov
 modul nije logički vezan za nalaženje ortologa, no za potrebe Ortobalancera je
 svojim sučeljima prilagođen njegovom cjevovodu. Nalaženje zajedničkih vrsta među
 skupovima ulaznih vrsta predstavlja jednu novu dimenziju u pronalasku ortolognih
-proteina. Konvencionalno traženja ortologa\cite{Tatusov, Baratham} jest
-kvalitetnije jer se pretraživanje odvija na razini sekvence, ali je moguće samo
-za genome koji su u potpunosti istraženi i zapisani u baze
-podataka.\cite{Flicek} Podizanje potrage za ortolozima na razinu vrsta omogućava
-da se ortolozi pronađu i među vrstama čiji genomi nisu još zabilježeni.
+proteina. Konvencionalno traženja ortologa\cite{tatusov1997genomic,
+bharatham2011determinants} jest kvalitetnije jer se pretraživanje odvija na
+razini sekvence, ali je moguće samo za genome koji su u potpunosti istraženi i
+zapisani u baze podataka.\cite{flicek2011ensembl} Podizanje potrage za
+ortolozima na razinu vrsta omogućava da se ortolozi pronađu i među vrstama čiji
+genomi nisu još zabilježeni.
 
 Ovaj modul za svoj rad koristi podatke iz NCBI-jeve \emph{Taxonomy} baze.
 Koristi se čvorovi taksonomskog stabla živog svijeta i znanstvena imena
@@ -65,7 +66,7 @@ ortologa, postavlja svoj brojač za tu grupu na vrijednost zbroja brojača svoje
 djece, pri čemu se od djece ne razmatraju već balansirani čvorovi. U slučaju da
 nijedan brojač u čvoru ne ostane na vrijednosti $0$, čvor se proglašava
 balansiran. Drugim riječima, u svakoj grupi ortologa postoji barem jedna vrsta
-ispod toga čvora te se one mougu ispisati kao uparene ili zamjenjive vrste.  U
+ispod toga čvora te se one mogu ispisati kao uparene ili zamjenjive vrste.  U
 idealnom, ali i najčešćem slučaju, desit će se da je vrsta prisutna u svim
 grupama ortologa te će tada sam čvor promatrane vrste biti proglašen
 balansiranim i roditelji ga zbog oga neće razmatrati. Za primjenu nalaženja

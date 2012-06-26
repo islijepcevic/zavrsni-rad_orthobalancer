@@ -1,9 +1,9 @@
 \chapter{Cjevovod}
 \label{chap:cjevovod}
 
-Cjevovod je arhitektonski programski obrazac u kojem prolaze kroz filtre koji su
-postavljeni jedan za drugim. Time se simulira jedan tok koji ulazne podatke
-transformacijom kroz filtre generira izlazne podatke. U ovome projektu
+Cjevovod je arhitektonski programski obrazac u kojem podaci prolaze kroz filtre
+koji su postavljeni jedan za drugim. Time se simulira jedan tok koji iz ulaznih
+podataka transformacijom kroz filtre generira izlazne podatke. U ovome projektu
 cjevovodna arhitektura je samo logički kostur koji se enkapsulira unutar razreda
 \emph{Pipeline}. Iako je u začetku razvoja aplikacije svaki filter bio zaseban
 proces, vrlo ubrzo je ustanovljeno kako većina filtera generira podatke koji su
@@ -19,7 +19,6 @@ disk u direktorij vezan za instancu \emph{Pipeline-a}. Stvarni objekt kojeg
 prima konstruktor \emph{Pipeline-a} je rječnik prilagođen uporabi mrežna
 aplikacije, što je detaljnije opisano u poglavlju \ref{chap:server}.
 
-% SLIKA CJEVOVODA % TODO
 \begin{figure}[h!]
 \centering
 %\includegraphics[width=1.0\linewidth]{figures/cjevovod.png}
@@ -29,13 +28,16 @@ radi boljeg uvida u rad cjevovoda}
 \label{fig:cjevovod}
 \end{figure}
 
-Pri pokretanju cjevovoda za svaku se od unesenih sekvenci stvara objetk razreda
+Pri pokretanju cjevovoda za svaku se od unesenih sekvenci stvara objekt razreda
 \emph{ProteinHolder} prilikom čega se obavljaju pozivi filtara nezavisnih za
-svaku pojedinu sekvencu. Prvi filter koji se koristi je alat \emph{BLAST} te je
-izveden kao poziv zasebnog izvršnog programa \emph{blastall} na sljedeći način:
+svaku pojedinu sekvencu. Prvi filter koji se koristi je alat
+\emph{BLAST}\cite{altschul1997gapped} te je izveden kao poziv zasebnog izvršnog
+programa \emph{blastall} na sljedeći način:
+
 \begin{lstlisting}[language=bash]
 blastall -p blastp -i <ulaz-FASTA> -d <nr-baza> -m 8 -a <broj-dretvi>
 \end{lstlisting}
+
 Argument \emph{p} s parametrom \emph{blastp} označava programu da se koristi
 algoritam za uspoređivanje jedne ulazne sekvence amino kiselina sa bazom
 proteinskih sekvenci. S argumentom \emph{i} se zadaje put do ulazne datoteke s
@@ -58,9 +60,11 @@ sljedeći korak u cjevovodu.
 Sljedeći filter je izvršni program \emph{fastacmd} koji za svaki gi-broj pronalazi
 i ispisuje sekvencu u FASTA formatu, također koristeći NCBI-jevu neredundantnu
 bazu. Program se poziva ovako:
+
 \begin{lstlisting}[language=bash]
 fastacmd -i <ulaz> -d <nr-baza>
 \end{lstlisting}
+
 Budući da program \emph{fastacmd} dolazi u paketu zajedno sa \emph{BLAST}
 alatima, argumenti imaju sličnu konotaciju kao i za \emph{blastall}: s
 argumentom \emph{i} se zadaje ulazna datoteka, a s \emph{d} put do neredundantne

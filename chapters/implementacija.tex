@@ -6,11 +6,15 @@
 
 Aplikacija je pisana u programskom jeziku Python verzije 2.7. Aplikacija se
 dijeli u nekoliko zasebnih cjelina. U središtu aplikacije nalazi se cjovovod
-koji poziva alate poput BLAST-a i fastacmd-a za komuniciranje sa NCBI-jevom
-neredundantnom bazom, zatim dio aplikacije za odabir i balansiranje vrsta na
-taksonomskom stablu te alat mafft\cite{mafft} za poravnanje sekvenci.  Pored
-cjevovoda implementirana je mrežna aplikacija kao korisničko sučelje za cijeli
-program.  Mrežna aplikacija je implementirana koristeći Flask microframework,
-dok su operacije na klijentskoj strani implementirane u javascriptu uz
-korištenje biblioteke jQuery.
+koji poziva alate poput BLAST-a\cite{altschul1997gapped} i fastacmd-a za
+komuniciranje sa NCBI-jevom neredundantnom bazom, zatim dio aplikacije za
+odabir i balansiranje vrsta na taksonomskom stablu te alat mafft\cite{mafft} za
+poravnanje sekvenci. Rad cjevovoda detaljo je opisan u poglavlju
+\ref{chap:cjevovod}, a modul za odabir i balansiranje vrsta u poglavlju
+\ref{chap:tax}. Pored cjevovoda implementirana je mrežna aplikacija kao
+korisničko sučelje za cijeli program. Mrežna aplikacija je implementirana
+koristeći Flask microframework verzije 0.7, dok su operacije na klijentskoj
+strani implementirane u javascriptu uz korištenje biblioteke jQuery. Opis rada
+mrežne aplikacije dan je u poglavlju \ref{chap:server}.
+
 

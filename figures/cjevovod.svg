@@ -14,13 +14,20 @@
    height="1052.3622047"
    id="svg3550"
    version="1.1"
-   inkscape:version="0.48.1 r9760"
-   sodipodi:docname="workflow.svg"
-   inkscape:export-filename="/home/ivanam/Dropbox/OrthoBalancer/16_orthobalancer/workflow.png"
-   inkscape:export-xdpi="350"
-   inkscape:export-ydpi="350">
+   inkscape:version="0.47 r22583"
+   sodipodi:docname="cjevovod.svg"
+   inkscape:export-filename="/home/ivan/semestar/ZR/ob_zavrsni_rad/figures/cjevovod.png"
+   inkscape:export-xdpi="89.996368"
+   inkscape:export-ydpi="89.996368">
   <defs
      id="defs3552">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       id="perspective102" />
     <inkscape:path-effect
        effect="spiro"
        id="path-effect3900"
@@ -77,15 +84,15 @@
      inkscape:pageshadow="2"
      inkscape:zoom="0.75069212"
      inkscape:cx="354.67887"
-     inkscape:cy="480.74213"
+     inkscape:cy="161.03716"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1381"
-     inkscape:window-height="955"
-     inkscape:window-x="1757"
-     inkscape:window-y="20"
-     inkscape:window-maximized="0">
+     inkscape:window-width="1280"
+     inkscape:window-height="752"
+     inkscape:window-x="0"
+     inkscape:window-y="24"
+     inkscape:window-maximized="1">
     <inkscape:grid
        type="xygrid"
        id="grid3135" />
@@ -98,7 +105,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -115,13 +122,17 @@
        xml:space="preserve"
        transform="scale(0.95426322,1.0479289)"><tspan
          sodipodi:role="line"
-         id="tspan3331"
-         x="20.958578"
-         y="39.833073">paralogue</tspan><tspan
-         sodipodi:role="line"
          id="tspan3333"
          x="20.958578"
-         y="72.333076">fasta files</tspan></text>
+         y="39.833073">FASTA</tspan><tspan
+         sodipodi:role="line"
+         x="20.958578"
+         y="72.333069"
+         id="tspan2910">datoteke</tspan><tspan
+         sodipodi:role="line"
+         x="20.958578"
+         y="104.83307"
+         id="tspan2912">paraloga</tspan></text>
     <path
        inkscape:transform-center-y="4.5308506"
        inkscape:transform-center-x="4.1163848"
@@ -180,15 +191,21 @@
        id="text2999-9"
        y="198.97519"
        x="18.652609"
-       style="font-size:25.99999991px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans"
+       style="font-size:26px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans"
        xml:space="preserve"
        transform="scale(0.98221311,1.018109)"><tspan
          sodipodi:role="line"
-         id="tspan3077">lists of identifiers </tspan><tspan
+         id="tspan3081"
+         x="18.652609"
+         y="198.97519">za svaki paralog</tspan><tspan
          sodipodi:role="line"
-         id="tspan3079">of similar proteins </tspan><tspan
+         x="18.652609"
+         y="231.47519"
+         id="tspan2919">lista identifikatora</tspan><tspan
          sodipodi:role="line"
-         id="tspan3081">for each paralogue</tspan></text>
+         x="18.652609"
+         y="263.97519"
+         id="tspan2921">sličnih sekvenci</tspan></text>
     <rect
        y="189.02347"
        x="271.54205"
@@ -232,31 +249,27 @@
     <text
        xml:space="preserve"
        style="font-size:26px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans"
-       x="22.168144"
-       y="354.52075"
+       x="8.2677746"
+       y="353.24417"
        id="text3184"
        sodipodi:linespacing="125%"
        transform="scale(0.95832274,1.0434898)"><tspan
          sodipodi:role="line"
-         id="tspan3137"
-         x="22.168144"
-         y="354.52075">fasta records</tspan><tspan
-         sodipodi:role="line"
-         id="tspan3139"
-         x="22.168144"
-         y="387.02075">of possible</tspan><tspan
-         sodipodi:role="line"
-         id="tspan3141"
-         x="22.168144"
-         y="419.52075">orthologues </tspan><tspan
-         sodipodi:role="line"
-         id="tspan3143"
-         x="22.168144"
-         y="452.02075">for each</tspan><tspan
-         sodipodi:role="line"
          id="tspan3145"
-         x="22.168144"
-         y="484.52075">paralogue</tspan></text>
+         x="8.2677746"
+         y="353.24417">za svaki paralog</tspan><tspan
+         sodipodi:role="line"
+         x="8.2677746"
+         y="385.74417"
+         id="tspan2941">FASTA zapisi</tspan><tspan
+         sodipodi:role="line"
+         x="8.2677746"
+         y="418.24417"
+         id="tspan2943">kandidata za</tspan><tspan
+         sodipodi:role="line"
+         x="8.2677746"
+         y="450.74417"
+         id="tspan2945">ortologe</tspan></text>
     <rect
        style="fill:none;stroke:#000000;stroke-width:1.29718816;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
        id="rect3227"
@@ -268,29 +281,29 @@
        transform="scale(0.88956836,1.1241407)"
        xml:space="preserve"
        style="font-size:26px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans"
-       x="24.060659"
+       x="15.075826"
        y="526.24927"
        id="text3237"
        sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         id="tspan4769"
-         x="24.060659"
-         y="526.24927">names of source</tspan><tspan
-         sodipodi:role="line"
-         id="tspan4771"
-         x="24.060659"
-         y="558.74927">organism species for</tspan><tspan
-         sodipodi:role="line"
-         id="tspan4773"
-         x="24.060659"
-         y="591.24927">every group of</tspan><tspan
          id="tspan3880"
          sodipodi:role="line"
-         x="24.060659"
-         y="623.74927">orthologues</tspan><tspan
+         x="15.075826"
+         y="526.24927">za svaku grupu</tspan><tspan
+         sodipodi:role="line"
+         x="15.075826"
+         y="558.74927"
+         id="tspan2956">ortologa, imena vrsta</tspan><tspan
+         sodipodi:role="line"
+         x="15.075826"
+         y="591.24927"
+         id="tspan2958">koje sadrže kandidate</tspan><tspan
+         sodipodi:role="line"
+         x="15.075826"
+         y="623.74927"
+         id="tspan2960">ortologe</tspan><tspan
          sodipodi:role="line"
          id="tspan4775"
-         x="24.060659"
+         x="15.075826"
          y="656.24927" /></text>
     <g
        id="g4194"
@@ -312,7 +325,7 @@
            y="491.86493"
            x="339.34866"
            id="tspan4163"
-           sodipodi:role="line">&gt; paralogue1</tspan></text>
+           sodipodi:role="line">&gt; paralog1</tspan></text>
     </g>
     <g
        id="g4244"
@@ -334,7 +347,7 @@
            id="tspan4242"
            sodipodi:role="line"
            x="456.78619"
-           y="491.10236">&gt; paralogue2</tspan></text>
+           y="491.10236">&gt; paralog2</tspan></text>
     </g>
     <g
        id="g4254"
@@ -356,7 +369,7 @@
            id="tspan4252"
            sodipodi:role="line"
            x="571.1734"
-           y="491.10236">&gt; paralogue3</tspan></text>
+           y="491.10236">&gt; paralog3</tspan></text>
     </g>
     <g
        inkscape:transform-center-y="-7.6061734"
@@ -379,15 +392,15 @@
          xml:space="preserve"
          transform="scale(1.036275,0.96499482)"><tspan
            style="font-weight:bold"
+           id="tspan4319"
            y="594.66589"
            x="479.10696"
-           id="tspan4317"
-           sodipodi:role="line">similarity</tspan><tspan
+           sodipodi:role="line">mjere</tspan><tspan
            style="font-weight:bold"
-           id="tspan4319"
            y="604.45288"
            x="479.10696"
-           sodipodi:role="line">scores</tspan></text>
+           sodipodi:role="line"
+           id="tspan2925">sličnosti</tspan></text>
     </g>
     <g
        id="g4630"
@@ -409,15 +422,15 @@
            id="tspan4585"
            sodipodi:role="line"
            x="342.39899"
-           y="746.56708">&gt; orthologue11</tspan><tspan
+           y="746.56708">&gt; ortolog11</tspan><tspan
            id="tspan4587"
            sodipodi:role="line"
            x="342.39899"
-           y="761.56708">&gt; orthologue12</tspan><tspan
+           y="761.56708">&gt; ortolog12</tspan><tspan
            id="tspan4589"
            sodipodi:role="line"
            x="342.39899"
-           y="776.56708">&gt; orthologue13</tspan><tspan
+           y="776.56708">&gt; ortolog13</tspan><tspan
            id="tspan4591"
            sodipodi:role="line"
            x="342.39899"
@@ -443,15 +456,15 @@
            id="tspan4697"
            sodipodi:role="line"
            x="462.88684"
-           y="746.56708">&gt; orthologue21</tspan><tspan
+           y="746.56708">&gt; ortolog21</tspan><tspan
            id="tspan4699"
            sodipodi:role="line"
            x="462.88684"
-           y="761.56708">&gt; orthologue22</tspan><tspan
+           y="761.56708">&gt; ortolog22</tspan><tspan
            id="tspan4701"
            sodipodi:role="line"
            x="462.88684"
-           y="776.56708">&gt; orthologue23</tspan><tspan
+           y="776.56708">&gt; ortolog23</tspan><tspan
            id="tspan4703"
            sodipodi:role="line"
            x="462.88684"
@@ -474,15 +487,15 @@
          sodipodi:role="line"
          id="tspan4727"
          x="563.37756"
-         y="388.69006">&gt; orthologue31</tspan><tspan
+         y="388.69006">&gt; ortolog31</tspan><tspan
          sodipodi:role="line"
          id="tspan4729"
          x="563.37756"
-         y="410.35803">&gt; orthologue32</tspan><tspan
+         y="410.35803">&gt; ortolog32</tspan><tspan
          sodipodi:role="line"
          id="tspan4731"
          x="563.37756"
-         y="432.02597">&gt; orthologue33</tspan><tspan
+         y="432.02597">&gt; ortolog33</tspan><tspan
          sodipodi:role="line"
          id="tspan4733"
          x="563.37756"
@@ -542,19 +555,23 @@
          sodipodi:role="line"
          id="tspan3104"
          x="27.055605"
-         y="740.73383">find common species</tspan><tspan
+         y="740.73383">pronađi zajednički</tspan><tspan
          sodipodi:role="line"
-         id="tspan3106"
          x="27.055605"
-         y="773.23383">(with allowed </tspan><tspan
+         y="773.23383"
+         id="tspan2962">podskup vrsta</tspan><tspan
          sodipodi:role="line"
          id="tspan3108"
          x="27.055605"
-         y="805.73383">exchangeability)</tspan><tspan
+         y="805.73383">(s dozvoljenom</tspan><tspan
+         sodipodi:role="line"
+         x="27.055605"
+         y="838.23383"
+         id="tspan2966">zamjenjivosti)</tspan><tspan
          sodipodi:role="line"
          id="tspan3110"
          x="27.055605"
-         y="838.23383" /></text>
+         y="870.73383" /></text>
     <path
        inkscape:connector-curvature="0"
        id="path3098"
@@ -590,13 +607,13 @@
        id="text3917"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         id="tspan3927"
-         x="538.8374"
-         y="875.82355">create an alignment of sequences </tspan><tspan
-         sodipodi:role="line"
          id="tspan3929"
          x="534.69873"
-         y="908.32355">from common species</tspan><tspan
+         y="875.82355">stvori poravnanje sekvenci iz</tspan><tspan
+         sodipodi:role="line"
+         x="534.69873"
+         y="908.32355"
+         id="tspan2970">zajedničkog podskupa vrsta</tspan><tspan
          sodipodi:role="line"
          id="tspan3931"
          x="534.69873"

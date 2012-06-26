@@ -1,7 +1,35 @@
 \chapter{Uvod}
 \label{chap:uvod}
 
+Biološka sličnost među vrstama oduvijek je fascinirala čovječanstvo. Potpunije
+razumijevanje sličnosti na molekularnoj razini moglo bi imati posljedice velikog
+značenja. Na primjer, mnoge evolucijske veze među vrstama se mogu zaključiti na
+temelju sličnosti, odnosno razlike genetskog materijala među vrstama.
 
-automatizacija (posla kroz cjevovod->treba ići u neko uvodno poglavlje o namjeri)
+Orthobalancer je mrežna aplikacija kojoj je cilj za zadani skup paralognih
+proteina pronaći skup ortolognih proteina, odnosno proteina koji obavljaju
+slične funkcije u drugim vrstama. Iako postoje mnoge metode za nalaženje
+ortologa bazirane samo na genetskim informacijama, odnosno na DNA ili na
+proteinskoj sekvenci, takve metode se mogu primijeniti samo na organizme čiji su
+cjelokupni genomi sekvencirani u bazama podataka. Orthobalancer ovom problemu
+pristupa na način da za svaki od ulaznih paralognih proteina prikupi skup vrsta
+koje sadrže proteine dovoljno slične ulaznome proteinu, a zatim spustom kroz
+taksonomsko stablo živog svijeta nalazi zajednički podskup vrsta kako bi odlučio
+za koje proteine se može zaključiti da su ortolozi.
 
-robusnost
+Dodatno, korisnik u aplikaciju može unijeti stupanj \emph{zamjenjivosti} na
+način da određene čvorove taksonomskog stabla proglasi \emph{zamjenjivima}.
+Tada, za dano podstablo, nije nužno da svi skupovi sadrže identičnu vrstu, već
+je dozvoljeno odstupanje pri kojem se bilo koja vrsta mogu \emph{balansirati}
+kao reprezentativne vrste svog skupa za dano \emph{zamjenjivo} podstablo.
+
+Detaljniji biološki uvod dan je u poglavlju \ref{chap:teoretski-uvod}. Poglavlje
+\ref{chap:podaci} daje pregled o korištenim formatima podataka, bazama te
+ulaznim i izlaznim podacima. Kratki opis implementacije dan je u poglavlju
+\ref{chap:implementacija}. Središnji dio aplikacije --- cjevovod --- opisan je u
+poglavlju \ref{chap:cjevovod}. Modul za nalaženje i balansiranje vrsta objašnjen
+je u poglavlju \ref{chap:tax}. Poglavlje \ref{chap:rezultati} komentira dobivene
+rezultate. Zaključak je iznesen u poglavlju \ref{chap:zakljucak}.
+
+
+ 

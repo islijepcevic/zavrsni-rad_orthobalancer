@@ -1,0 +1,9 @@
+OrthoBalancer web application takes as an input a set of  $n$ \emph{bona fide}
+paralogous --- similar, but encoded by a different gene --- protein sequences from
+the same species. For each of the paralogues, the application returns the set of
+the most similar proteins from other species present in the underlying database.
+At its core is an module that uses taxonomic tree to find a common subset
+of $n$ sets of species, while allowing some fuzziness or ``exchangeability" of
+related species.  The degree of exchangeability, that is, the level in the
+taxonomic tree below which any species can serve as a representative of the
+branch, can be modified by the user. 
