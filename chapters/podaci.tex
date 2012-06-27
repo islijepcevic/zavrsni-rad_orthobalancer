@@ -1,7 +1,7 @@
 \chapter{Podaci}
 \label{chap:podaci}
 
-Orthobalancer radi sa primarnim proteinskim strukturama --- sekvencama
+Orthobalancer radi s primarnim proteinskim strukturama --- sekvencama
 reziduuma, odnosno aminokiselina. Za zapis sekvenci koristi se standardizirani
 FASTA format. Orthobalancer za svoj rad koristi dvije
 NCBI-jeve\footnote{National Center for Biotechnology Information} baza
@@ -30,14 +30,15 @@ dopuštene.
 \label{sec:nrdb}
 
 Neredundantna baza je baza podataka koju nudi NCBI, a sadrži prikupljene zapise
-iz nekoliko baza sa raznih instituta u svijetu, poput GenPept, Swissprot, PIR,
+iz nekoliko baza s raznih instituta u svijetu, poput GenPept, Swissprot, PIR,
 PDF, PDB i NCBI RefSeq. Za neredundantnu bazu se garantira da ne sadrži dvije
-jednake sekvence, već se one tada spajaju u jedan FASTA zapis sa proširenim
+jednake sekvence, već se one tada spajaju u jedan FASTA zapis s proširenim
 zaglavljem.
 
 Neredundantnoj bazi se pristupa pomoću alata BLAST\cite{altschul1997gapped} i
 fastacmd, koji također dolazi u paketu s BLAST-om te se zato koristi oblik
-neredundantne baze preformatiran u FASTA format.
+neredundantne baze preformatiran u FASTA format. Veličina neredundantne baze
+jest $4.1$GB.
 
 
 \section{Taksonomsko stablo živog svijeta}
@@ -53,14 +54,24 @@ rod, vrsta, \ldots). \emph{names.dmp} za svaki čvor čuva niz raznih imena, od
 kojih je jedno jedinstveno, odnosno znanstveno, a ostala su prisutna za lakše
 raspoznavanje od strane čovjeka.
 
+\begin{sloppypar}
+
+\emph{nodes.dmp} sadrži nešto više od $900000$ čvorova, dok \emph{names.dmp}
+sadrži skoro $1300000$ čvorova. Budući da se baze redovno ažuriraju, točni
+brojevi su podložni promjenama. \emph{names.dmp} je veća jer se ondje nalaze i
+imena čvorova koji su izbrisani ili spojeni.
+
+\end{sloppypar}
+
 
 \section{Ulaz}
 \label{sec:input}
 
 Aplikacija kao ulaz prima nekolicinu paralognih proteina u FASTA formatu. Ako
 korisnik posjeduje samo sekvencu proteina, može ju zadati bez FASTA zaglavlja,
-no u tome je slučaju dužan dati ime unesenoj sekvenci. Nužno je imati ime za svaki
-ulazni paralog te je nužno da su sva međusobno jedinstvena.
+no u tome je slučaju dužan dati ime unesenoj sekvenci. Prije početka izvođenja
+svaki ulazni paralog mora imati upisano ime te to ime mora biti jedinstveno među
+svim paralozima.
 
 Dodatno, korisnik može specificirati čvorove taksonomskog stabla za čija
 podstabla smatra da sadrže zamjenjive vrste. Ponuđen je i osnovni skup
@@ -73,7 +84,7 @@ zamjenskih čvorova za koje se vjeruje da bi mogli biti od koristi korisniku.
 \begin{figure}[h!]
 \centering
 \includegraphics[width=5.4in]{figures/tablica.png}
-\caption{Izlazna tablica sa web stranice Orthobanalcera}
+\caption{Izlazna tablica s web stranice Orthobalancera}
 \label{fig:tablica}
 \end{figure}
 
@@ -82,7 +93,7 @@ tablice su imenovani po paralozima s ulaza. Retci su grupirani u zamjenske
 čvorove. Svaki redak predstavlja jedan balansirani skup vrsta. U stupcu pod
 pojedinim paralogom nalazi se ortologna vrsta, a lijevo od svih vrsta je zapisan
 čvor na kojem su vrste tog retka balansirane. Primjer tablice se može vidjeti
-naslici \ref{fig:tablica}.
+na slici \ref{fig:tablica}.
 
 Također, završna stranica sadrži poveznice za preuzimanje generiranih datoteka
 tijekom izvođenja. Datoteke su opisane u nastavku.
@@ -90,7 +101,7 @@ tijekom izvođenja. Datoteke su opisane u nastavku.
 Najvažnije izlazne datoteke su one koje sadrže poravnate sekvence ortologa iz
 pojedine grupe ortologa. Za svaki ulazni paralog postoji datoteka imena
 \emph{<ime-proteina>.afa}, gdje nastavak \emph{afa} ima konotaciju poravnata
-FASTA \engl{aligned fasta}. Datoteke ovog tipa se mogu direktno preuzeti sa
+FASTA \engl{aligned fasta}. Datoteke ovog tipa se mogu direktno preuzeti s
 poveznice na završnoj stranici.
 
 Nadalje, sa završne stranice se može preuzeti i \emph{zip} arhiva poravnatih
@@ -129,7 +140,7 @@ pronađene za sve paraloge, ali se ne nalaze niti ispod jednog zamjenskog čvora
 
 \begin{sloppypar}
 
-Na poslijetku, sa završne stranice se može preuzeti i \emph{zip} arhiva sa
+Na poslijetku, sa završne stranice se može preuzeti i \emph{zip} arhiva s
 cjelokupnim sadržajem informacija prikupljenim tijekom pojedinog upita.
 Imenovana je \emph{<PAR>\_OB\_<D>\_<M>.zip}, gdje je \emph{<PAR>}
 ime prvog paraloga kojeg je korisnik unio, \emph{<D>} dan, a \emph{<M>}

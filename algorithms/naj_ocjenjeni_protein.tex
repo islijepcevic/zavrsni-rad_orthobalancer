@@ -11,7 +11,7 @@
             \State $ocjene.ažuriraj(ocjena, fastaRecord.ocjena)$
         \EndFor
     \EndFor        
-    \Return $ocjene$
+    \State \Return $ocjene$
 \EndFunction
 
 \Function{ProteinHolder::propagiraj}{$najOcjene$}
@@ -19,7 +19,7 @@
         \ForAll{$element \in fastaRecord.elementiZaglavlja$}
             \State $najOcjena \gets najOcjene.dohvati( element['gid'] )$
             \If{$\lnot najOcjena.provjeriElement( element )$}
-                \State $element['zastavicaNajbolji'] \gets \bot$%\textbf{false}
+                \State $element['zastavicaNajbolji'] \gets \textbf{false}$ % \bot
             \EndIf
         \EndFor
     \EndFor
