@@ -3,12 +3,12 @@
 \caption{Nalaženje najbolje ocijenjenih proteina}
 \label{algo:best-score}
 \begin{algorithmic}[1]
-\Function{ProteinHolder::izračunajNajOcjene}{}
+\Function{ProteinHolder::izracunajNajOcjene}{}
     \State $ocjene \gets BestScoreCollection()$
     \ForAll{$fastaRecord \in this.records$}
         \ForAll{$element \in fastaRecord.elementiZaglavlja$}
             \State $ocjena \gets BestScore(element)$
-            \State $ocjene.ažuriraj(ocjena, fastaRecord.ocjena)$
+            \State $ocjene.azuriraj(ocjena, fastaRecord.ocjena)$
         \EndFor
     \EndFor        
     \State \Return $ocjene$
@@ -19,7 +19,7 @@
         \ForAll{$element \in fastaRecord.elementiZaglavlja$}
             \State $najOcjena \gets najOcjene.dohvati( element['gid'] )$
             \If{$\lnot najOcjena.provjeriElement( element )$}
-                \State $element['zastavicaNajbolji'] \gets \textbf{false}$ % \bot
+                \State $element['zastavicaNajbolji'] \gets \textbf{laž}$ % \bot
             \EndIf
         \EndFor
     \EndFor
@@ -27,10 +27,10 @@
 
 \Function{pronađiNajOcjene}{$proteinHolders$}
 \Comment{funkcija je isječak iz cjevovoda}
-    \State $najOcjene \gets new BestScoreCollection()$
+    \State $najOcjene \gets \textbf{stvori} BestScoreCollection()$
     \ForAll{$protein \in proteinHolders$}
-        \State $ocjene \gets protein.izračunajNajOcjene()$
-        \State $najOcjene.ažurirajKolekcijom( ocjene )$
+        \State $ocjene \gets protein.izracunajNajOcjene()$
+        \State $najOcjene.azurirajKolekcijom( ocjene )$
     \EndFor
     \ForAll{$protein \in proteinHolders$}
     \Comment{propagacija najboljih ocjena}

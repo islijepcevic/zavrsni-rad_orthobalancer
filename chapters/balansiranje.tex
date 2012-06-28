@@ -1,4 +1,5 @@
 \chapter{Nalaženje zajedničkih vrsta}
+\setcounter{algorithm}{0} % postavlja brojac algoritama nazad na 1
 \label{chap:tax}
 
 % TODO pomaknut ovo u uvod negdje; sredit citate
@@ -51,13 +52,13 @@ stabla, pazeći da ukupni brojač niti u jednom čvoru ne bude više od jednom
 povećan za neku grupu ortologa.
 % TODO možda napisati pseudokod
 
+\input{algorithms/balansiranje.tex}
+
 Nakon toga treba inicijalizirati zamjenske čvorove i pripadna podstabla. Za
 svaki zamjenski čvor poziva se rekurzivna funkcija koja se spušta do listova i
 svakome čvoru u njegovu listu zamjenskih roditeljskih čvorova dodaje
 \emph{tax\_id} zamjenskog čvora nad kojim je rekurzija pozvana.  Time svaki čvor
 sadrži informaciju kojim zamjenskim podstablima pripada.
-
-\input{algorithms/balansiranje.tex}
 
 Slijedi algoritam \ref{algo:balance}. Algoritam rekurzivno prolazi stablom,
 polazeći od listova. U zamjenskim podstablima balansira grupe ortologa na

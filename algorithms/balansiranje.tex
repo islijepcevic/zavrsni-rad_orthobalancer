@@ -6,15 +6,17 @@
 
 \begin{algorithmic}[1]
 
-\State algoritam obilaska počinje funkcijom $obidiStablo()$
-\State $ULAZ:$ korijenski čvor stabla; $n$ skupova vrsta
-\State $IZLAZ:$ višeslojni rječnik $izlaz$ koji za svaki balansirani čvor sadrži
+\Require korijenski čvor stabla; $n$ skupova vrsta
+\Ensure višeslojni rječnik $izlaz$ koji za svaki balansirani čvor sadrži
 listu vrsta predstavnica iz svake grupe $g$  
+
+\State \Comment algoritam obilaska počinje funkcijom $obidiStablo()$
 
 \Function{balansiraj}{cvor, grupe}
     \State $izlaz \gets$ new $izlaz$
     \ForAll{$dijete \in cvor.djeca$}
-        \State $izlaz \gets izlaz \cup balansiraj(dijete, grupe)$
+        %\State $izlaz \gets izlaz \cup balansiraj(dijete, grupe)$
+        \State $izlaz \gets izlaz$ $\cup$ \Call{balansiraj}{$dijete, grupe$}
         \If{$\neg dijete.balansiran$}
             \ForAll{$g \in grupe$}
                 \State $cvor.brojac[g] \gets cvor.brojac[g] + dijete.brojac[g]$
@@ -22,7 +24,7 @@ listu vrsta predstavnica iz svake grupe $g$
         \EndIf
     \EndFor
     \If{$cvor.brojac[g] > 0$ $\forall g \in grupe$}
-        \State $cvor.balansiran \gets \top$
+        \State $cvor.balansiran \gets \textbf{istina}$
         \If{$\exists k \forall g \in grupe (cvor.brojac[g] = k)$}
         %\If{$\forall g \in grupe cvor.brojac[g] SU JEDNAKI$}
             \State $A \gets$ skup svih pripadajućih vrsta pod cvorom $cvor$
@@ -37,21 +39,24 @@ cvorom $cvor$
     \State \Return $izlaz$
 \EndFunction
 
-\algstore{balans}
-\end{algorithmic}
-\end{algorithm}
-
-\begin{algorithm}[h!]
-\begin{algorithmic}[1]
-\algrestore{balans}
+% ovo zakomentirano sluzi za razbijanje algoritma na vise dijelova kako bi mogli
+% biti prikazani na vise stranica u pdf-u
+%\algstore{balans}
+%\end{algorithmic}
+%\end{algorithm}
+%
+%\begin{algorithm}[h!]
+%\begin{algorithmic}[1]
+%\algrestore{balans}
 
 \Function{obidiStablo}{$cvor, grupe$}
     \If{$cvor.zamjenski()$}
-    \Comment{vraća $\top$ ako je čvor u zamjenskom podstablu}
-        \State \Return $balansiraj(cvor, grupe)$
+    \Comment{vraća \textbf{istina} ako je čvor u zamjenskom podstablu}
+        %\State \Return $balansiraj(cvor, grupe)$
+        \State \Return \Call{balansiraj}{$cvor, grupe$}
     \Else
         \If{$cvor.list()$}
-        \Comment{vraća $\top$ ako je čvor list}
+        \Comment{vraća \textbf{istina} ako je čvor list}
             \ForAll{$g\in grupe$}
                 \State $izlaz[g][$'nezamjenski'$] \gets cvor.ime$
             \EndFor
@@ -59,7 +64,9 @@ cvorom $cvor$
             \State $izlaz \gets$ new $izlaz$
             \ForAll{$dijete \in cvor.djeca$}
                 \If{$dijete.ukupniBrojac = cvor.ukupniBrojac$}
-                    \State $izlaz \gets izlaz \cup obidiStablo(dijete, grupe)$
+                    %\State $izlaz \gets izlaz \cup obidiStablo(dijete, grupe)$
+                    \State $izlaz \gets izlaz$ $\cup$ \Call{obidiStablo}{$dijete,
+grupe$}
                 \EndIf
             \EndFor
         \EndIf

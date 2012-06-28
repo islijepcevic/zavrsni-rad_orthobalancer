@@ -2,13 +2,26 @@
 \label{chap:zakljucak}
 
 Orthobalancer nudi jedinstven i izravan način odabira skupova ortolognih
-proteinskih sekvenci iz bliskih taksonomskih grana. U suštini, aplikacija radi
-na razini vrsta i taksonomske hijerarhije, rađe nego na razini proteinskih
-sekvenci. To međutim ima posljedicu da se ne može dokazati da aplikacija nalazi
-prave ortologe. Ipak, pristup koji koristi Orthobalancer je inovativan zbog
-činjenice da se na taj način pokriva znatno širi skup vrsta za nalaženje
-ortologa.
+proteinskih sekvenci iz bliskih taksonomskih grana. Aplikacija prima nekoliko
+paralognih proteinskih sekvenci, a vraća skup ortologa za svaki paralog, uz
+informaciju koliko je pojedini ortolog evolucijski udaljen od ortologa iz
+skupova ostalih paraloga.
+
+Aplikacija je izrađena kao mrežna aplikacija te je dostupna na URL-u
+\footnotesize{\url{http://orthobalancer.bmad.bii-sg.org}}. \normalsize
+Mrežna aplikacija izrađena je robusno, a unošenje podataka dinamički je
+prilagodivo potrebama korisnika.
+
+Aplikacija u pozadini radi na razini vrsta i taksonomske hijerarhije umjesto na
+razini proteinskih sekvenci. Iako takav pristup nema garanciju da su pronađene
+sekvence doista ortologne, prednost nad konvencionalnim metodama jest u tome što
+je pokriven znatno veći broj proteina i vrsta. Klasične metode rade samo na
+potpuno sekvencioniranim genomima kakvih je općenito malo, ograničeni su u
+glavnom na kralježnjake, a sekvencioniranje cijelog genoma je sklono pogreškama.
+Orthobalancer doprinosi kreiranju potrebnih balansiranih skupova sekvenci za
+organizme za koje potpun genom nije poznat.
 
 Za daljnje istraživanje, ideja zajedničkog podskupa vrsta među vrstama
 usporedive taksonomske širine bi se mogla probati primijeniti za drugačije
 namjene.
+

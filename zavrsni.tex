@@ -3,10 +3,32 @@
 \usepackage{listings}
 \usepackage{color}
 \usepackage{algorithm}
-\usepackage{algpseudocode}
+\usepackage[noend]{algpseudocode}
 
 % preimenovan naslov popisa algoritama na hrvatski
 \renewcommand{\listalgorithmname}{Popis algoritama} 
+
+% preimenovan Caption iznad algoritma
+\floatname{algorithm}{Algoritam}
+
+% hrvatska imena za pseudokodove
+\algrenewcommand{\algorithmicforall}{\textbf{za svaki}}
+\algrenewcommand{\algorithmicdo}{\textbf{radi}}
+\algrenewcommand{\algorithmicfunction}{\textbf{funkcija}}
+\algrenewcommand{\algorithmicreturn}{\textbf{vrati}}
+\algrenewcommand{\algorithmicif}{\textbf{ako}}
+\algrenewcommand{\algorithmicthen}{\textbf{tada}}
+\algrenewcommand{\algorithmicelse}{\textbf{inače}}
+\algrenewcommand{\algorithmicrequire}{\textbf{Ulaz:}}
+\algrenewcommand{\algorithmicensure}{\textbf{Izlaz:}}
+\renewcommand{\algorithmiccomment}[1]{\# #1}
+
+% numeriranje algoritama po poglavljima
+\renewcommand{\thealgorithm}{\thechapter.\arabic{algorithm}}
+% dodatno, u svakom novom poglavlju koje ima algoritam, dodana je naredba koja
+% resetira brojac algoritma unutar poglavlja
+% ovo se moglo i s novom naredbom za poglavlje koja poziva klasicni \chapter pa
+% onda navedeno resetiranje \setcounter
                                                        
 % \lstset{language=Pascal} NACI NACINA ZA UBACIT BASH KOD
 \lstset{
@@ -31,7 +53,15 @@ taksonomske širine}
 
 % Dodavanje zahvale ili prazne stranice. Ako ne želite dodati zahvalu, naredbu
 % ostavite radi prazne stranice.
-\zahvala{ zahvale }
+\zahvala{
+Zahvaljujem dr. sc. Mili Šikiću, Fakultet elektrotehnike i računarstva,
+prijetelju i najboljem mentoru, na povjerenju.
+
+Također zahvaljujem dr. sc Ivani Mihalek, Bioinformatics Institute, A-STAR,
+Singapore, i dr. sc. Mili Šikiću za uspješnu suradnju, njihovu potporu prilikom
+rada na ovom istraživanju i upisa na željeni diplomski studij te na trudu koji
+su uložili za ljetnu praksu.
+}
 
 \begin{sloppypar}
 \tableofcontents
