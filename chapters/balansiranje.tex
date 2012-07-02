@@ -10,27 +10,27 @@ skupovima ulaznih vrsta predstavlja jednu novu dimenziju u pronalasku ortolognih
 proteina. Konvencionalno traženja ortologa \cite{bharatham2011determinants,
 tatusov1997genomic} jest kvalitetnije jer se pretraživanje odvija na razini
 sekvence, ali je moguće samo za genome koji su u potpunosti istraženi i zapisani
-u baze podataka.\cite{flicek2011ensembl} Podizanje potrage za ortolozima na
+u baze podataka. \cite{flicek2011ensembl} Podizanje potrage za ortolozima na
 razinu vrsta omogućava da se ortolozi pronađu i među vrstama čiji genomi nisu
 još zabilježeni.
 
 Ovaj modul za svoj rad koristi podatke iz NCBI-jeve \emph{Taxonomy} baze.
-Koristi se čvorovi taksonomskog stabla živog svijeta i znanstvena imena
+Koriste se čvorovi taksonomskog stabla živog svijeta i znanstvena imena
 pridijeljena čvorovima. Čvorovi su identificirani svojim jedinstvenim
 identifikatorima \emph{tax\_id}, a svaki čvor ima pridruženo jedno ili više
 korištenih imena. Samo jedno od tih imena je označeno kao znanstveno i također
-je jedinstveno za svaki čvor, uz neke iznimke poput sintetički stvorenih vrsta
+je jedinstveno za svaki čvor uz neke iznimke poput sintetički stvorenih vrsta
 koje dijele znanstveno ime \emph{Synthetic construct}. Datoteke koje sadrže
 podatke iz ovih baza su prilično velike te njihovo učitavanje, prilagođavanje i
 korištenje najviše utječe na trajanje izvođenja programa.
 
 Na početku rada modula svi podaci se prilagođavaju za potrebe modula. Iz
-cjevovoda se od svake instance \emph{ProteinHolder}-a uzimaju zabilježene vrste,
+cjevovoda se od svake instance \emph{ProteinHolder-a} uzimaju zabilježene vrste,
 a iz popisa zamjenjivih čvorova koje zadaje korisnik se prikupljaju svi zadani
 čvorovi. Svim prikupljenim imenima se tada pridružuje \emph{tax\_id} iz baze.
 
 Nakon toga se gradi taksonomsko stablo u memoriji. Stablo je izvedeno kao veliki
-rječnik kojem za ključeve koristi \emph{tax\_id}, a svaki čvor je objekt razreda
+rječnik koji za ključeve koristi \emph{tax\_id}, a svaki čvor je objekt razreda
 \emph{Node}. Razred \emph{Node} sadrži sljedeće bitne podatke: \emph{tax\_id}
 roditeljskog čvora, listu djece, brojač za svaku grupu ortologa, ukupni brojač
 grupa, listu zamjenskih roditeljskih čvorova te zastavicu je li balansiran.
@@ -62,20 +62,21 @@ sadrži informaciju kojim zamjenskim podstablima pripada.
 
 Slijedi algoritam \ref{algo:balance}. Algoritam rekurzivno prolazi stablom,
 polazeći od listova. U zamjenskim podstablima balansira grupe ortologa na
-sljedeći način. Nakon što se obiđu listovi, svaki čvor, za svaku od grupa
-ortologa, postavlja svoj brojač za tu grupu na vrijednost zbroja brojača svoje
-djece, pri čemu se od djece ne razmatraju već balansirani čvorovi. U slučaju da
+sljedeći način. Nakon što se obiđu listovi, svaki čvor za svaku od grupa
+ortologa postavlja svoj brojač za tu grupu na vrijednost zbroja brojača svoje
+djece pri čemu se od djece ne razmatraju već balansirani čvorovi. U slučaju da
 nijedan brojač u čvoru ne ostane na vrijednosti $0$, čvor se proglašava
 balansiran. Drugim riječima, u svakoj grupi ortologa postoji barem jedna vrsta
-ispod toga čvora te se one mogu ispisati kao uparene ili zamjenjive vrste.  U
+ispod tog čvora te se one mogu ispisati kao uparene ili zamjenjive vrste.  U
 idealnom, ali i najčešćem slučaju, desit će se da je vrsta prisutna u svim
 grupama ortologa te će tada sam čvor promatrane vrste biti proglašen
-balansiranim i roditelji ga zbog oga neće razmatrati. Za primjenu nalaženja
-ortolognih proteina to bi značilo da neka vrsta, na primjer Homo sapiens, sadrži
-ortologni protein svakome od ulaznih paraloga. Algoritam je tako osmišljen kako
-bi se balansirale što srodnije vrste.  Što se tiče dijelova stabla koji nisu pod
-niti jednim zamjenskim čvorom, algoritam ne provodi postupak balansiranja te se
-u izlaz dodaju jedino one vrste koje su prisutne u svim grupama ortologa. Izlaz
-ovog algoritma vraća se pozivatelju, odnosno cjevovodu.
+balansiranim i roditelji ga zbog toga neće razmatrati. Za primjenu nalaženja
+ortolognih proteina to bi značilo da neka vrsta, na primjer čovjek (lat.
+\emph{Homo sapiens}), sadrži ortologni protein svakome od ulaznih paraloga.
+Algoritam je tako osmišljen kako bi se balansirale što srodnije vrste.  Što se
+tiče dijelova stabla koji nisu pod jednim zamjenskim čvorom, algoritam ne
+provodi postupak balansiranja te se u izlaz dodaju jedino one vrste koje su
+prisutne u svim grupama ortologa. Izlaz ovog algoritma vraća se pozivatelju,
+odnosno cjevovodu.
 
 

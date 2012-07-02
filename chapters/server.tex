@@ -1,16 +1,20 @@
 \chapter{Mrežna aplikacija}
 \label{chap:server}
 
+\begin{sloppypar}
 Korisničko sučelje Orthobalancera ostvareno je kao mrežna aplikacija
 implementirana također u Pythonu koristeći Flask microframework. Flask je
 izgrađen na Werkzeug WSGI\footnote{Web Server Gateway Interface \cite{pep333}}
-mrežnom alatu i Jinja2 sustavu predložaka. Flask je zvan \emph{microframeworkom}
-jer svoju jezgru drži jednostavnom, ali proširivom. Flask također nudi određene
-konvencije koje pojednostavljuju izgradnju mrežne aplikacije. Osim Flaska, za
-razvoj aplikacije korišten je javascript uz većinu koda napisanu pomoću
-biblioteke jQuery. Osim za asinkronu komunikaciju s poslužiteljem pomoću
-AJAX-a\footnote{Asynchronous JavaScript and XML}, javascript se najviše koristio
-za postizanje dinamike te robusnosti provjere i sinkronizacije ulaznih podataka.
+mrežnom alatu i Jinja2 sustavu predložaka \engl{template}. Flask je zvan
+\emph{microframeworkom} jer svoju jezgru drži jednostavnom, ali proširivom.
+Flask također nudi određene konvencije koje pojednostavljuju izgradnju mrežne
+aplikacije. Osim Flaska, za razvoj aplikacije korišten je javascript uz većinu
+koda napisanu pomoću biblioteke jQuery. Osim za asinkronu komunikaciju s
+poslužiteljem pomoću AJAX-a\footnote{Asynchronous JavaScript and XML},
+javascript se najviše koristio za postizanje dinamike te robusnosti provjere i
+sinkronizacije ulaznih podataka.
+
+\end{sloppypar}
 
 % pomalo o svakom bitnom url-u / templatu
 HTML\footnote{HyperText Markup Language} stranice koje aplikacija generira
@@ -33,9 +37,9 @@ opis mogućnosti koje su ostvarene za ulazne podatke se nalazi u odjeljku.
 samo kada korisnik želi unijeti vlastite zamjenske čvorove taksonomskog stabla.
 Stranica se otvara s ponuđenim pretpostavljenim skupom zamjenskih čvorova.
 
-    \item \emph{execution.html}  prikazuje trenutno stanje izvođenja, asinkrono
-komunicirajući s poslužiteljem, kako bi korisnik imao jasniju predodžbu o
-zadacima koje poslužitelj obavlja te o trajanju izvođenja. Jednom kada stranica
+    \item \emph{execution.html}  prikazuje trenutno stanje izvođenja asinkrono
+komunicirajući s poslužiteljem kako bi korisnik imao jasniju predodžbu o
+zadacima koje poslužitelj obavlja te o trajanju izvođenja. Jednom kad stranica
 za ispis primi poruku o kraju izvođenja, automatski se preusmjerava na URL
 \textbf{'/output'}.
 
@@ -60,8 +64,8 @@ svaki URL veže određeni posao koji treba obaviti. Bitniji URL-ovi su sljedeći
     \item \textbf{'/'} ulazna točka za pokretanje novog upita. Upit dobiva
 jedinstveni identifikacijski broj te se za njega inicijaliziraju određeni podaci
 na poslužitelju kao sjednički podaci. Automatski se preusmjerava na
-\textbf{/start}. Od ove točke na dalje svaki URL ima identifikacijski broj upita
-u svome parametru, što nije posebno naznačeno. Takav je način prenošenja
+\textbf{'/start'}. Od ove točke na dalje svaki URL ima identifikacijski broj upita
+u svome parametru što nije posebno naznačeno. Takav je način prenošenja
 identifikacijskog broja odabran kako bi korisnik samo pomoću URL-a mogao
 dohvatiti svoje rezultate.
 
@@ -69,7 +73,7 @@ dohvatiti svoje rezultate.
 HTML stranicu baziranu na predlošku \emph{input.html}.
 
     \item \textbf{'/finish\_input'} poziva se tek u trenutku kad su na klijentskoj
-strani svi ulazni podaci pravilno uneseni. Podaci su tada već spremljeni u
+strani svi ulazni podaci pravilno uneseni. Podaci su tad već spremljeni u
 sjedničkim varijablama te se može stvoriti instanca razreda \emph{Pipeline},
 odnosno nova dretva cjevovoda. Ovisno o korisnikovom odabiru na stranici
 \emph{input.html}, sljedeće stanje izvođenja može biti na URL-u
@@ -81,9 +85,13 @@ zamjenskim čvorovima.
 zamjenskim čvorovima, sprema ih u argumente sjednice te se preusmjerava na URL
 \textbf{'/executing'}.
 
+\begin{sloppypar}
+
     \item \textbf{'/get\_exchangeable'} generira stranicu baziranu na predlošku
 \emph{manipulate\_exchangeable.html} s podacima  iz datoteke s predloženim
 zamjenskim čvorovima.
+
+\end{sloppypar}
 
     \item \textbf{'/save\_exchangeable'} sprema korisnikove zamjenske čvorove u
 argumente sjednice te se preusmjerava na URL \textbf{'/executing'}.
@@ -139,7 +147,7 @@ sinkronizirati podatke sačuvane u sjedničkim varijablama na poslužitelju s
 trenutnim stanjem na stranici koju gleda korisnik. Sinkronizacije se događaju u
 pozadini asinkronim komuniciranjem klijenta i poslužitelja. Asinkrona
 komunikacija ostvarena je AJAX tehnologijom, a klijent i poslužitelj prenose
-podatke u JSON\footnote{JavaScript Object Notation} formatu, za što Flask ima
+podatke u JSON\footnote{JavaScript Object Notation} formatu za što Flask ima
 kvalitetnu podršku.
 
 \begin{figure}[h!]
@@ -165,9 +173,9 @@ je krivo. Svim sekvencama s unesenim imenom poslužitelj miče zastavicu da su
 jedinstvena te pokreće validaciju njihovih podataka. Poslužitelj opet vraća staro
 ime sekvence s promijenjenim imenom. Također, u slučaju nejedinstvenog unesenog
 imena, svim HTML elementima s istim imenom se pridružuje prikladna poruka
-upozorenja. Nakon postavljanja imena na poslužitelju, klijent je dužan
+upozorenja. Nakon postavljanja imena na poslužitelju klijent je dužan
 provjeriti jesu li neka od jednakih imena na stranici trenutnim unosom
-razriješena. Klijent dohvaća sve elemente s imenom jednakim starim imenom koje
+razriješena. Klijent dohvaća sve elemente s imenom jednakim starom imenu koje
 je poslužitelj vratio. Ukoliko takvih nema, ništa se ne događa jer problema niti
 nije bilo. Ako ih je više, na primjer 2, to znači da ih je prethodno bilo 3, ali
 ta se imena i dalje trebaju razriješiti tako da im se poruke upozorenja ne miču.
@@ -179,17 +187,17 @@ Unos sekvence korisnik može obaviti na dva načina: može napisati ili zalijepi
 FASTA sekvencu u područje za unos teksta ili može \emph{uploadati} FASTA
 datoteku. Ako je odabran tekstualni način, jednom kada se sekvenca upiše u
 površinu za unos aktivira se logika koja predaje sekvencu poslužitelju na obradu
-AJAX pozivom. Za slučaj kada je odabran \emph{upload} FASTA datoteke ne može se
+AJAX pozivom. Za slučaj kada je odabran \emph{upload} FASTA datoteke, ne može se
 koristiti AJAX. AJAX tehnologija je u mogućnosti slati samo čisti tekst, a
 javascript nije u mogućnosti otvarati datoteke odabrane za \emph{upload}. Iz tih
 razloga se ovdje koristi pomalo zastarjelo i ne sasvim pouzdano, ali jedino
 preostalo rješenje, a to je simuliranje \emph{submita} HTML forme i korištenje
 HTML \emph{iframe} taga. \emph{iframe} tag u svojoj osnovnoj funkcionalnosti
-omogućava prikaz bilo koje druge stranice unutar osnovne stranice koju je
+omogućuje prikaz bilo koje druge stranice unutar osnovne stranice koju je
 korisnik zatražio, drugim riječima \emph{iframe} element je kao prozor koji
 prikazuje neku drugu stranicu. No ako \emph{form} tagu koji sadrži sve elemente
-ulaznih podataka za \emph{target} tag postavimo ime \emph{iframea} na istoj
-stranici, sadržaj trenutne stranice ostati će nepromijenjen, što uključuje i sve
+ulaznih podataka za \emph{target} atribut postavimo ime \emph{iframea} na istoj
+stranici, sadržaj trenutne stranice ostati će nepromijenjen što uključuje i sve
 podatke u \emph{input} elementima koje je korisnik unio. U ovome slučaju, gdje
 je potrebno asinkrono prenijeti datoteku do poslužitelja, dodane su sljedeće
 akcije. Prilikom odabira datoteke za \emph{upload} automatski se poziva

@@ -16,7 +16,7 @@ Tok cjevovoda se može vidjeti na slici \ref{fig:cjevovod}. Ulaz u cjevovod
 predstavljaju paralogni proteini u FASTA formatu koje zadaje korisnik. Ti se
 podaci zadaju pri stvaranju objekta \emph{Pipeline} kako bi se mogli zapisati na
 disk u direktorij vezan za instancu \emph{Pipeline-a}. Stvarni objekt kojeg
-prima konstruktor \emph{Pipeline-a} je rječnik prilagođen uporabi mrežna
+prima konstruktor \emph{Pipeline-a} je rječnik prilagođen uporabi mrežne
 aplikacije, što je detaljnije opisano u poglavlju \ref{chap:server}.
 
 \begin{figure}[h!]
@@ -31,7 +31,7 @@ zbog boljeg uvida u rad cjevovoda}
 Pri pokretanju cjevovoda za svaku se od unesenih sekvenci stvara objekt razreda
 \emph{ProteinHolder} prilikom čega se obavljaju pozivi filtara nezavisnih za
 svaku pojedinu sekvencu. Prvi filter koji se koristi je alat
-\emph{BLAST}\cite{altschul1997gapped} te je izveden kao poziv zasebnog izvršnog
+\emph{BLAST} \cite{altschul1997gapped} te je izveden kao poziv zasebnog izvršnog
 programa \emph{blastall} na sljedeći način:
 
 \begin{lstlisting}[language=bash]
@@ -70,7 +70,7 @@ alatima, argumenti imaju sličnu konotaciju kao i za \emph{blastall}: s
 argumentom \emph{i} se zadaje ulazna datoteka, a s \emph{d} put do neredundantne
 baze.
 
-Izlaz \emph{fastacmd}-a se parsira pomoću razreda FastaRecord. Svaka dobivena
+Izlaz \emph{fastacmd-a} se parsira pomoću razreda FastaRecord. Svaka dobivena
 sekvenca kao kandidat za ortologa dobiva instancu razreda FastaRecord u kojoj je
 sadržana sekvenca te sve bitne informacije iz zaglavlja pojedinog FASTA zapisa.
 Dodatno, instanci FastaRecord se pridružuje ocjena sličnosti sekvence koju
@@ -95,9 +95,9 @@ Na primjer:\\
 [\textbf{Cricetulus griseus}]}\\
 
 Na kraju obrade podataka za pojedini paralog s ulaza prolazi se listom svih
-objekata FastaRecord te se za svaku pronađenu vrstu odabire sekvenca s najboljom
-ocjenom sličnosti. Time nastaje jedan podskup sekvenci za koje možemo reći da
-predstavljaju grupu ortologa za dani paralog.
+objekata razreda FastaRecord te se za svaku pronađenu vrstu odabire sekvenca s
+najboljom ocjenom sličnosti. Time nastaje jedan podskup sekvenci za koje možemo
+reći da predstavljaju grupu ortologa za dani paralog.
 
 Nakon što je svaki paralog opisan jednim objektom razreda \emph{ProteinHolder}
 potrebno je odrediti postoji li koji gi-broj koji se može pronaći u grupama
@@ -123,6 +123,7 @@ razmatrano. Za takve slučajeve ne može se sa sigurnošču reći jesu li kodira
 geni doista ortologni ili se u nekoj roditeljskoj vrsti gen duplicirao te se s
 takvim nejednoznačnostima aplikacija ne bavi.
 
+\begin{sloppypar}
 Najbitniji korak u cjevovodu je pronalaženje i balansiranje zajedničkih vrsta na
 stablu taksonomije živog svijeta. Ovaj korak je detaljno opisan u poglavlju
 \ref{chap:tax}. Ovom se filtru kao ulaz predaju kompletni opisnici proteina,
@@ -131,15 +132,18 @@ potrebne informacije. Nakon što završi obrada, izlaz filtra je predočen
 višeslojnim rječnikom koji razdvaja podatke po sljedećim slojevima: grupe
 ortologa, grupe zamjenskih čvorova u taksonomskom stablu, grupe balansiranih
 čvorova u taksonomskom stablu te su zadnje vrijednosti balansirane vrste.
+\end{sloppypar}
 
 Zadnji korak u cjevovodu prije zapisivanja svih skupljenih podataka na disk je
 poravnanje sekvenci dobivenih kao izlaz programa \emph{fastacmd}. Za poravnanje
-se koristi alat \emph{mafft}\cite{mafft} te mu je ulaz datoteka sa zapisanim sekvencama u FASTA
-formatu, a izlaz datoteka s istim, ali poravnatim sekvencama. \emph{mafft} se
-poziva na sljedeći način:
+se koristi alat \emph{mafft} \cite{mafft} te mu je ulaz datoteka sa zapisanim
+sekvencama u FASTA formatu, a izlaz datoteka s istim, ali poravnatim sekvencama.
+\emph{mafft} se poziva na sljedeći način:
+
 \begin{lstlisting}[language=bash]
 mafft --auto <ulaz> > <izlaz>
 \end{lstlisting} 
+
 Argument --auto upućuje \emph{mafft} da automatski odabere najbolju strategiju
 poravnavanja sekvenci, uzimajući u obzir veličinu podataka. Izlaz se direktno
 preusmjerava u novu datoteku na disk jer poravnate sekvence nisu potrebne u

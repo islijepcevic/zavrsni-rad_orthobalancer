@@ -8,7 +8,7 @@ Homologija u biološkom smislu predstavlja slične osobine među vrstama na
 različitim razinama organizacije života, poput organa, tkiva, stanice ili
 molekule. Homologne osobine uočene među jedinkama različitih vrsta obično
 upućuju na zajedničke pretke tih vrsta u evoluciji. Međutim, u molekularnoj
-biologiji termin homolog se često koristi i za naznačavanje sličnosti. bez
+biologiji termin homolog se često koristi i za naznačavanje sličnosti bez
 obzira na genetsko srodstvo.\cite{bioinfo1}
 
 \begin{figure}[h!]
@@ -43,7 +43,7 @@ Postupak kojim se ovo postiže je sljedeći. Sekvence promatranih proteina se
 poravnaju i pronađu se pozicije na kojima su reziduumi aminokiselina jednaki,
 ili približno jednaki među svim sekvencama. Međutim, donošenje odluka o
 srodnosti na ovakav način je statističke naravi. Drugim riječima, nitko ne može
-garantirati da su dvije sekvence slične samo zato što imaju zajedničkog pretka.
+garantirati da dvije sekvence imaju zajedničkog pretka samo zato što su slične.  
 Ipak, što je veća sličnost, to je veća vjerojatnost da sekvence doista jesu
 srodne jer vjerojatnost slučajnog nastanka sličnih sekvenci geometrijski opada s
 porastom podudarnosti. Zato je potrebno imati velik skup uzoraka potpuno
@@ -58,7 +58,7 @@ Pitanje koje se prirodno sljedeće postavlja jest kako zaključiti imaju li dva
 proteina istu ulogu. Prva pretpostavka koja se ovdje donosi jest da ortolozi
 imaju jednake uloge. Ova je činjenica u glavnom točna i u odsutnosti
 eksperimentalne verifikacije ne može se biti precizniji. Dakle, određeni protein
-od interesa bi u glavnom željeli usporediti sa skupom njoegovih ortologa.
+od interesa bi u glavnom željeli usporediti sa skupom njegovih ortologa.
 
 Sada smo došli do problema prikupljanja skupa ortologa za dani protein. Kako bi
 se pristupilo ovom problemu, donosi se druga pretpostavka: ortolozi se mogu
@@ -66,9 +66,9 @@ pronaći pretragom \emph{uzajamno najboljeg pogotka} potpunih skupova paraloga i
 dvije vrste.
 
 Jedini način korištenja dva poptuna skupa paraloga jest da pretražujemo cijele
-genome. Međutim, trenutno postoji jako malo cjelokupnih sekvencioniranih genoma,
+genome. Međutim, trenutno postoji jako malo cjelokupnih sekvenciranih genoma,
 a i oni koji su poznati su pretežito uzimani iz kralježnjaka. Uz to,
-sekvencioniranje genoma i detekcija gena su skloni pogreškama. Alternativni
+sekvenciranih genoma i detekcija gena su skloni pogreškama. Alternativni
 pristup, na kojem počiva ideja za Orthobalancera, jest potražiti informacije u
 bazama podataka gdje se mogu naći individualne proteinske sekvence bez obzira na
 činjenicu je li ostatak genoma vrste koja sadrži protein poznat. Nakon
@@ -98,10 +98,9 @@ izdvojenoj grani koja ne sadrži vrste iz drugog skupa. Ovime bi se dobila kriva
 procjena velike brzine mutacije, pogotovo u odnosu na uparene vrste na ostatku
 stabla. Ovome problemu može se pristupiti na način da se odaberu čvorovi u
 stablu --- zamjenski čvorovi --- ispod kojih se za svaki skup traže
-'reprezentativne vrste, pokušavajući se balansirati što bliže vrstama. U
-ostatku taksonomskog stabla se prihvaćaju samo jedan-na-jedan pogodci vrsta među
+reprezentativne vrste, pokušavajući se balansirati što bliže vrstama. U ostatku
+taksonomskog stabla se prihvaćaju samo jedan-na-jedan pogodci vrsta među
 skupovima, ako postoje. Neizbalansirane grane se na taj način izbacuju iz
 analize, ostavljajući skupove vrsta koji su divergirali jednako daleko u
 prošlosti.
-
 

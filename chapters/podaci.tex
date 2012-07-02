@@ -14,14 +14,14 @@ taksonomsko stablo živog svijeta.
 
 FASTA je jedan od standardnih formata zapisa genetskih informacija na računalu.
 Format je tekstualnog oblika, a koristi se u NCBI-jevim alatima i bazama
-podataka, poput BLAST-a i neredundantne baze proteinskih sekvenci. Jedan zapis u
+podataka poput BLAST-a i neredundantne baze proteinskih sekvenci. Jedan zapis u
 datoteci s FASTA sekvencama se sastoji od zaglavlja i sekvence. Zaglavlje je
 jedan redak koji započinje s znakom '\texttt{>}' te nakon njega može imati razne
 informacije koje opisuju dan zapis. Zapisi proteinskih sekvenci u NCBI-jevoj
-neredundantnoj bazi obično imaju jedinstveni ključ sekvence, ime proteina, ime
+neredundantnoj bazi obično imaju: jedinstveni ključ sekvence, ime proteina, ime
 vrste u kojoj se protein nalazi, podatke o originalnoj bazi i slično. Nakon
 zaglavlja slijede retci koji sadrže zapisanu sekvencu gdje svaki znak
-predstavlja jedan reziduum aminokiseline u peptidnom lancu. Kad bi ti se retci
+predstavlja jedan reziduum aminokiseline u peptidnom lancu. Kad bi se ti retci
 slijepili zajedno, dobila bi se sekvenca u jednom nizu. Prazne linije nisu
 dopuštene.
 
@@ -30,28 +30,28 @@ dopuštene.
 \label{sec:nrdb}
 
 Neredundantna baza je baza podataka koju nudi NCBI, a sadrži prikupljene zapise
-iz nekoliko baza s raznih instituta u svijetu, poput GenPept, Swissprot, PIR,
+iz nekoliko baza s raznih instituta u svijetu poput GenPept, Swissprot, PIR,
 PDF, PDB i NCBI RefSeq. Za neredundantnu bazu se garantira da ne sadrži dvije
 jednake sekvence, već se one tada spajaju u jedan FASTA zapis s proširenim
 zaglavljem.
 
 Neredundantnoj bazi se pristupa pomoću alata BLAST\cite{altschul1997gapped} i
-fastacmd, koji također dolazi u paketu s BLAST-om te se zato koristi oblik
+fastacmd, koji također dolazi u paketu s BLAST-om, te se zato koristi oblik
 neredundantne baze preformatiran u FASTA format. Veličina neredundantne baze
-jest $4.1$GB.
+jest $12$GB.
 
 
 \section{Taksonomsko stablo živog svijeta}
 \label{sec:taxdb}
 
 \emph{Taxonomy} baza, odnosno baza taksonomskog stabla živog svijeta
-dostupna je u obliku nekoliko tekstualnih datoteka, od kojih svaka predstavlja
+dostupna, je u obliku nekoliko tekstualnih datoteka od kojih svaka predstavlja
 ispis pojedine relacije iz baze podataka. Najbitnije, koje se koriste u
-Orthobalanceru su \emph{nodes.dmp} i \emph{names.dmp}. Za svaki čvor stabla,
+Orthobalanceru, su \emph{nodes.dmp} i \emph{names.dmp}. Za svaki čvor stabla
 \emph{nodes.dmp} sadrži identifikacijski broj čvora, identifikacijski broj
-roditelja te niz dodatnih informacija, poput ranga čvora u stablu (carstvo,
-rod, vrsta, \ldots). \emph{names.dmp} za svaki čvor čuva niz raznih imena, od
-kojih je jedno jedinstveno, odnosno znanstveno, a ostala su prisutna za lakše
+roditelja te niz dodatnih informacija poput ranga čvora u stablu (carstvo, rod,
+vrsta, \ldots). \emph{names.dmp} za svaki čvor čuva niz raznih imena od kojih
+je jedno jedinstveno, odnosno znanstveno, a ostala su prisutna za lakše
 raspoznavanje od strane čovjeka.
 
 \begin{sloppypar}
@@ -69,7 +69,7 @@ imena čvorova koji su izbrisani ili spojeni.
 
 Aplikacija kao ulaz prima nekolicinu paralognih proteina u FASTA formatu. Ako
 korisnik posjeduje samo sekvencu proteina, može ju zadati bez FASTA zaglavlja,
-no u tome je slučaju dužan dati ime unesenoj sekvenci. Prije početka izvođenja
+no u tom je slučaju dužan dati ime unesenoj sekvenci. Prije početka izvođenja
 svaki ulazni paralog mora imati upisano ime te to ime mora biti jedinstveno među
 svim paralozima.
 
@@ -111,16 +111,16 @@ mjesec kad je upit bio pokrenut. Budući da su zaglavlja izlaznih FASTA
 sekvenci generirana tijekom rada Orthobalancera, ova \emph{zip} arhiva sadrži i
 datoteke s dodatnim informacijama za svaku ortolognu sekvencu, imenovane
 \emph{<ime-paraloga>\_orthologues.dict}. Svaka ortologna sekvenca će imati jednu
-liniju u ovoj opisnoj datoteci, sa sljedećim informacijama:
+liniju u ovoj opisnoj datoteci sa sljedećim informacijama:
 
 \begin{itemize}
 
     \item \emph{species name} ime vrste u kojoj se ova ortologna sekvenca
 nalazi. Može se reći da ova sekvenca predstavlja navedenu vrstu jer između svih
-pronađenih sekvenci okje pripadaju navedenoj vrsti, ova sekvenca ima najveći
+pronađenih sekvenci koje pripadaju navedenoj vrsti, ova sekvenca ima najveći
 rezultat sličnosti ulaznome paralogu.
 
-    \item \emph{score} rezultat sličnosti ove sekvence prema ulaznome paralogu,
+    \item \emph{score} rezultat sličnosti ove sekvence prema ulaznome paralogu
 dobiven iz izlaza alata BLAST.
 
     \item \emph{gid} jedan ili više identifikatora, odnosno FASTA ključeva ove
@@ -131,10 +131,10 @@ mogu naći u vrsti navedenoj u prvome stupcu.
 Dodatno, ova \emph{zip} arhiva sadrži i datoteku \emph{similar\_species.txt}.
 Ovdje je u tekstualnom obliku opisan sadržaj tablice na završnoj stranici. Na
 početku su navedena imena paraloga. Nadalje, za svaki zamjenski čvor navedene su
-grupe balansiranih vrsta, popraćene s čvorom taksonomskog stabla na kojem su
+grupe balansiranih vrsta popraćene s čvorom taksonomskog stabla na kojem su
 vrste balansirane. Ukoliko se u nekoj balansiranoj grupi za neki paralog
 pronašlo više ortologa, jedan se slučajnim odabirom prikazuje kao balansirani, a
-ostali se prikazuju kao nebalancirani \engl{unbalanced} na kraju ispisa
+ostali se prikazuju kao nebalansirani \engl{unbalanced} na kraju ispisa
 pripadajućeg zamjenskog čvora. Na kraju datoteke je grupa vrsta koje su
 pronađene za sve paraloge, ali se ne nalaze niti ispod jednog zamjenskog čvora.
 
